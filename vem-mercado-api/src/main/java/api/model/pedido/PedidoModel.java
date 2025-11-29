@@ -4,6 +4,7 @@ import api.model.endereco.EnderecoModel;
 import api.model.UsuarioModel;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,7 +17,7 @@ public class PedidoModel {
     private Long id;
 
     @Column (nullable = false, precision = 10, scale = 2)
-    private DecimalFormat valorPedido;
+    private BigDecimal valorPedido;
 
     @Column
     private LocalDateTime dataCriacao;
@@ -38,9 +39,10 @@ public class PedidoModel {
     public PedidoModel() {
     }
 
-    public PedidoModel(Long id, DecimalFormat valorPedido, UsuarioModel usuario, EnderecoModel endereco, List<ItemPedidoModel> itemPedido, List<StatusPedidoModel> statusPedido) {
+    public PedidoModel(Long id, BigDecimal valorPedido, LocalDateTime dataCriacao, UsuarioModel usuario, EnderecoModel endereco, List<ItemPedidoModel> itemPedido, List<StatusPedidoModel> statusPedido) {
         this.id = id;
         this.valorPedido = valorPedido;
+        this.dataCriacao = dataCriacao;
         this.usuario = usuario;
         this.endereco = endereco;
         this.itemPedido = itemPedido;
@@ -55,12 +57,20 @@ public class PedidoModel {
         this.id = id;
     }
 
-    public DecimalFormat getValorPedido() {
+    public BigDecimal getValorPedido() {
         return valorPedido;
     }
 
-    public void setValorPedido(DecimalFormat valorPedido) {
+    public void setValorPedido(BigDecimal valorPedido) {
         this.valorPedido = valorPedido;
+    }
+
+    public LocalDateTime getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public void setDataCriacao(LocalDateTime dataCriacao) {
+        this.dataCriacao = dataCriacao;
     }
 
     public UsuarioModel getUsuario() {
