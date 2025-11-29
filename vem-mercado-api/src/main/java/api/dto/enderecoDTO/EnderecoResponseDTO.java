@@ -1,51 +1,23 @@
-package api.model.endereco;
+package api.dto.enderecoDTO;
 
-
-import api.model.UsuarioModel;
-import jakarta.persistence.*;
-
-@Entity
-@Table (name = "endereco")
-public class EnderecoModel {
-
-    @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column (nullable = false)
+public class EnderecoResponseDTO {
     private String logradouro;
-    @Column (nullable = false)
     private String numero;
-    @Column (nullable = false)
     private String cep;
-    @Column (nullable = false)
     private String estado;
-    @Column(nullable = false)
     private String bairro;
-    @Column (nullable = false)
     private String cidade;
-    @ManyToOne
-    @JoinColumn (name = "usuario_id")
-    private UsuarioModel usuario;
 
-    public EnderecoModel() {
+    public EnderecoResponseDTO() {
     }
 
-    public EnderecoModel(Long id, String logradouro, String numero, String cep, String estado, String bairro, String cidade, UsuarioModel usuario) {
-        this.id = id;
+    public EnderecoResponseDTO(String logradouro, String numero, String cep, String estado, String bairro, String cidade) {
         this.logradouro = logradouro;
         this.numero = numero;
         this.cep = cep;
         this.estado = estado;
         this.bairro = bairro;
         this.cidade = cidade;
-        this.usuario = usuario;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getLogradouro() {
@@ -94,13 +66,5 @@ public class EnderecoModel {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
-    }
-
-    public UsuarioModel getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuarioModel usuario) {
-        this.usuario = usuario;
     }
 }
