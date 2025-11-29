@@ -1,4 +1,4 @@
-package com.example.vem_mercado_api;
+package api.vem_mercado_api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

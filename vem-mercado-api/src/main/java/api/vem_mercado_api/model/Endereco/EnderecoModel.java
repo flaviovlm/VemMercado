@@ -1,7 +1,7 @@
-package com.example.vem_mercado_api.model.Endereco;
+package api.vem_mercado_api.model.Endereco;
 
 
-import com.example.vem_mercado_api.model.UsuarioModel;
+import api.vem_mercado_api.model.UsuarioModel;
 import jakarta.persistence.*;
 
 @Entity

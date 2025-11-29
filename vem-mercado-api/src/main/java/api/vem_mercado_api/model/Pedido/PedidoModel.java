@@ -1,7 +1,7 @@
-package com.example.vem_mercado_api.model.Pedido;
+package api.vem_mercado_api.model.Pedido;
 
-import com.example.vem_mercado_api.model.Endereco.EnderecoModel;
-import com.example.vem_mercado_api.model.UsuarioModel;
+import api.vem_mercado_api.model.Endereco.EnderecoModel;
+import api.vem_mercado_api.model.UsuarioModel;
 import jakarta.persistence.*;
 
 import java.text.DecimalFormat;

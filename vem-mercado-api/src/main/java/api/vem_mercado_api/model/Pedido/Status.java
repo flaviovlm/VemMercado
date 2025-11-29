@@ -1,4 +1,4 @@
-package com.example.vem_mercado_api.model.Pedido;
+package api.vem_mercado_api.model.Pedido;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

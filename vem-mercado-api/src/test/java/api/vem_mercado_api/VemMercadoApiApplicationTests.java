@@ -1,4 +1,4 @@
-package com.example.vem_mercado_api;
+package api.vem_mercado_api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
