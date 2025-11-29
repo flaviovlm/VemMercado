@@ -1,6 +1,6 @@
-package api.vem_mercado_api.service;
+package api.service;
 
-import api.vem_mercado_api.repository.UsuarioRepository;
+import api.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

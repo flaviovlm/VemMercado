@@ -1,7 +1,7 @@
-package api.vem_mercado_api.model;
+package api.model;
 
-import api.vem_mercado_api.model.Endereco.EnderecoModel;
-import api.vem_mercado_api.model.Pedido.PedidoModel;
+import api.model.Endereco.EnderecoModel;
+import api.model.Pedido.PedidoModel;
 import jakarta.persistence.*;
 
 import java.util.List;

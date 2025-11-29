@@ -1,4 +1,4 @@
-package api.vem_mercado_api.model.Pedido;
+package api.model.Pedido;
 
 import jakarta.persistence.*;
 

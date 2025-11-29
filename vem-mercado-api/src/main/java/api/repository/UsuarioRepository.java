@@ -1,6 +1,6 @@
-package api.vem_mercado_api.repository;
+package api.repository;
 
-import api.vem_mercado_api.model.UsuarioModel;
+import api.model.UsuarioModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

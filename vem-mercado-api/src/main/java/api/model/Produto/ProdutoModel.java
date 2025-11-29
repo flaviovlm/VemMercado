@@ -1,6 +1,6 @@
-package api.vem_mercado_api.model.Produto;
+package api.model.Produto;
 
-import api.vem_mercado_api.model.Pedido.ItemPedidoModel;
+import api.model.Pedido.ItemPedidoModel;
 import jakarta.persistence.*;
 
 import java.text.DecimalFormat;
