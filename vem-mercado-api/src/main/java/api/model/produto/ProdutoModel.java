@@ -3,6 +3,7 @@ package api.model.produto;
 import api.model.pedido.ItemPedidoModel;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class ProdutoModel {
     @Column (nullable = false)
     private String nome;
 
-    @Column (unique = true)
+    @Column (nullable = false, unique = true)
     private String ean;
 
     @Column
@@ -26,7 +27,7 @@ public class ProdutoModel {
     private String sku;
 
     @Column (nullable = false, precision = 10, scale = 2)
-    private DecimalFormat valor;
+    private BigDecimal valor;
 
     @Column (nullable = false)
     private Integer estoque;
@@ -35,13 +36,13 @@ public class ProdutoModel {
     @Column
     private Categoria categoria;
 
-    @OneToMany
+    @OneToMany(mappedBy = "produto")
     private List<ItemPedidoModel> itemPedido;
 
     public ProdutoModel() {
     }
 
-    public ProdutoModel(Long id, String nome, String ean, String descricao, String sku, DecimalFormat valor, Integer estoque, Categoria categoria, List<ItemPedidoModel> itemPedido) {
+    public ProdutoModel(Long id, String nome, String ean, String descricao, String sku, BigDecimal valor, Integer estoque, Categoria categoria, List<ItemPedidoModel> itemPedido) {
         this.id = id;
         this.nome = nome;
         this.ean = ean;
@@ -93,11 +94,11 @@ public class ProdutoModel {
         this.sku = sku;
     }
 
-    public DecimalFormat getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(DecimalFormat valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 

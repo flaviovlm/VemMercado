@@ -3,6 +3,7 @@ package api.model.pedido;
 import api.model.produto.ProdutoModel;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 @Entity
@@ -16,7 +17,7 @@ public class ItemPedidoModel {
     private Integer quantidade;
 
     @Column (nullable = false, precision = 10, scale = 2)
-    private DecimalFormat valorItem;
+    private BigDecimal valorItem;
 
     @ManyToOne
     @JoinColumn (name = "produto_id")
@@ -29,7 +30,7 @@ public class ItemPedidoModel {
     public ItemPedidoModel() {
     }
 
-    public ItemPedidoModel(Long id, Integer quantidade, DecimalFormat valorItem, ProdutoModel produto, PedidoModel pedido) {
+    public ItemPedidoModel(Long id, Integer quantidade, BigDecimal valorItem, ProdutoModel produto, PedidoModel pedido) {
         this.id = id;
         this.quantidade = quantidade;
         this.valorItem = valorItem;
@@ -53,11 +54,11 @@ public class ItemPedidoModel {
         this.quantidade = quantidade;
     }
 
-    public DecimalFormat getValorItem() {
+    public BigDecimal getValorItem() {
         return valorItem;
     }
 
-    public void setValorItem(DecimalFormat valorItem) {
+    public void setValorItem(BigDecimal valorItem) {
         this.valorItem = valorItem;
     }
 
