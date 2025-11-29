@@ -40,51 +40,60 @@ public class UsuarioRequestDTO {
     public UsuarioRequestDTO() {
     }
 
-    public String getNome() {
+    public UsuarioRequestDTO(String nome, String email, String senha, String cpf, String telefone, List<EnderecoRequestDTO> endereco) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.endereco = endereco;
+    }
+
+    public @NotBlank(message = "O nome é obrigatorio") @Size(min = 3, max = 50, message = "O nome deve ter minimo de 3 caracteres") String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(@NotBlank(message = "O nome é obrigatorio") @Size(min = 3, max = 50, message = "O nome deve ter minimo de 3 caracteres") String nome) {
         this.nome = nome;
     }
 
-    public String getEmail() {
+    public @NotBlank(message = "O email é obrigatorio") @Email(message = "Informe um email valido") String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(@NotBlank(message = "O email é obrigatorio") @Email(message = "Informe um email valido") String email) {
         this.email = email;
     }
 
-    public String getSenha() {
+    public @NotBlank(message = "A senha é obrigatoria") @Size(min = 3, max = 10, message = "A senha deve ter minimo 10 caracteres") String getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public void setSenha(@NotBlank(message = "A senha é obrigatoria") @Size(min = 3, max = 10, message = "A senha deve ter minimo 10 caracteres") String senha) {
         this.senha = senha;
     }
 
-    public String getCpf() {
+    public @NotBlank(message = "O CPF é obrigatorio") @Size(max = 11, message = "O CPF deve ter minimo 11 caracteres") String getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public void setCpf(@NotBlank(message = "O CPF é obrigatorio") @Size(max = 11, message = "O CPF deve ter minimo 11 caracteres") String cpf) {
         this.cpf = cpf;
     }
 
-    public String getTelefone() {
+    public @NotBlank(message = "O telefone é obrigatorio") @Size(max = 11, message = "O telefone deve ter minimo 11 caracteres") String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefone(@NotBlank(message = "O telefone é obrigatorio") @Size(max = 11, message = "O telefone deve ter minimo 11 caracteres") String telefone) {
         this.telefone = telefone;
     }
 
-    public List<EnderecoRequestDTO> getEndereco() {
+    public @Valid @NotNull(message = "A lista de endereços é obrigatória") @Size(min = 1, message = "É necessário pelo menos um endereço") List<EnderecoRequestDTO> getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(List<EnderecoRequestDTO> endereco) {
+    public void setEndereco(@Valid @NotNull(message = "A lista de endereços é obrigatória") @Size(min = 1, message = "É necessário pelo menos um endereço") List<EnderecoRequestDTO> endereco) {
         this.endereco = endereco;
     }
 }

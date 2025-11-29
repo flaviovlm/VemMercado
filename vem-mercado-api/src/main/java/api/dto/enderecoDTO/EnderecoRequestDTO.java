@@ -38,43 +38,43 @@ public class EnderecoRequestDTO {
         this.cidade = cidade;
     }
 
-    public String getLogradouro() {
+    public @NotBlank(message = "O logradouro é obrigatorio") @Size(min = 5, max = 100, message = "O logradouro deve ter minimo 5 caracteres") String getLogradouro() {
         return logradouro;
     }
 
-    public void setLogradouro(String logradouro) {
+    public void setLogradouro(@NotBlank(message = "O logradouro é obrigatorio") @Size(min = 5, max = 100, message = "O logradouro deve ter minimo 5 caracteres") String logradouro) {
         this.logradouro = logradouro;
     }
 
-    public String getNumero() {
+    public @NotBlank(message = "O número é obrigatorio") @Size(max = 10, message = "O número deve ter máximo 10 caracteres") String getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(@NotBlank(message = "O número é obrigatorio") @Size(max = 10, message = "O número deve ter máximo 10 caracteres") String numero) {
         this.numero = numero;
     }
 
-    public String getCep() {
+    public @NotBlank(message = "O cep é obrigatorio") @Size(min = 8, max = 10, message = "O cep deve ter máximo 10 caracteres") String getCep() {
         return cep;
     }
 
-    public void setCep(String cep) {
+    public void setCep(@NotBlank(message = "O cep é obrigatorio") @Size(min = 8, max = 10, message = "O cep deve ter máximo 10 caracteres") String cep) {
         this.cep = cep;
     }
 
-    public String getEstado() {
+    public @NotBlank(message = "O estado é obrigatorio") @Size(min = 3, max = 40, message = "O estado ter deve ter minimo 3 caracteres") String getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(@NotBlank(message = "O estado é obrigatorio") @Size(min = 3, max = 40, message = "O estado ter deve ter minimo 3 caracteres") String estado) {
         this.estado = estado;
     }
 
-    public String getCidade() {
+    public @NotBlank(message = "O bairro é obrigatorio") @Size(min = 3, max = 40, message = "O bairro deve ter minimo 3 caracteres") @NotBlank(message = "A cidade é obrigatorio") @Size(min = 5, max = 40, message = "A cidade deve ter minimo 5 caracteres") String getCidade() {
         return cidade;
     }
 
-    public void setCidade(String cidade) {
+    public void setCidade(@NotBlank(message = "O bairro é obrigatorio") @Size(min = 3, max = 40, message = "O bairro deve ter minimo 3 caracteres") @NotBlank(message = "A cidade é obrigatorio") @Size(min = 5, max = 40, message = "A cidade deve ter minimo 5 caracteres") String cidade) {
         this.cidade = cidade;
     }
 }
