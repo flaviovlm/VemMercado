@@ -1,6 +1,6 @@
-package api.model.Produto;
+package api.model.produto;
 
-import api.model.Pedido.ItemPedidoModel;
+import api.model.pedido.ItemPedidoModel;
 import jakarta.persistence.*;
 
 import java.text.DecimalFormat;

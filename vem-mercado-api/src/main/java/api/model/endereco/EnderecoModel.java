@@ -1,4 +1,4 @@
-package api.model.Endereco;
+package api.model.endereco;
 
 
 import api.model.UsuarioModel;

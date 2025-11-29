@@ -1,4 +1,4 @@
-package api.model.Produto;
+package api.model.produto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

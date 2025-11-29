@@ -1,6 +1,6 @@
-package api.model.Pedido;
+package api.model.pedido;
 
-import api.model.Endereco.EnderecoModel;
+import api.model.endereco.EnderecoModel;
 import api.model.UsuarioModel;
 import jakarta.persistence.*;
 

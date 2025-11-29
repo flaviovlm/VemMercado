@@ -1,4 +1,4 @@
-package api.model.Pedido;
+package api.model.pedido;
 
 import jakarta.persistence.*;
 
