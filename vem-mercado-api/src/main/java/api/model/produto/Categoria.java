@@ -7,7 +7,8 @@ public enum Categoria {
     UTILIDADES ("Utilidades"),
     LIMPEZA ("Limpeza"),
     HORTOLICAS ("Hortoliças"),
-    DERMOCOSMETICOS ("Dermocosméticos");
+    DERMOCOSMETICOS ("Dermocosméticos"),
+    ELETRONICOS ("Eletrônicos");
 
     private String texto;
 
