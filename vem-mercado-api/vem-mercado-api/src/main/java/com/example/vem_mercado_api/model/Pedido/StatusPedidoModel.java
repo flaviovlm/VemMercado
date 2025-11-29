@@ -19,7 +19,7 @@ public class StatusPedidoModel {
     private LocalDateTime dataHora;
 
     @ManyToOne
-    @JoinColumn(name = "idPedido")
+    @JoinColumn(name = "pedido_id")
     private PedidoModel pedido;
 
     public StatusPedidoModel() {

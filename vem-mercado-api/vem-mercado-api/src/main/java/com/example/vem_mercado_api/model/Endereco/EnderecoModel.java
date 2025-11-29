@@ -21,7 +21,7 @@ public class EnderecoModel {
     @Column (nullable = false)
     private String cidade;
     @ManyToOne
-    @JoinColumn (name = "idUsuario")
+    @JoinColumn (name = "usuario_id")
     private UsuarioModel usuario;
 
     public EnderecoModel() {

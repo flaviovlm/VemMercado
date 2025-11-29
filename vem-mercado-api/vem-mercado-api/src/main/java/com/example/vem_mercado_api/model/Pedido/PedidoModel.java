@@ -5,6 +5,7 @@ import com.example.vem_mercado_api.model.UsuarioModel;
 import jakarta.persistence.*;
 
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -13,16 +14,24 @@ public class PedidoModel {
 
     @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column (nullable = false, precision = 10, scale = 2)
     private DecimalFormat valorPedido;
+
+    @Column
+    private LocalDateTime dataCriacao;
+
     @ManyToOne
-    @JoinColumn (name = "idUsuario")
+    @JoinColumn (name = "usuario_id")
     private UsuarioModel usuario;
+
     @ManyToOne
-    @JoinColumn (name = "idEndereco")
+    @JoinColumn (name = "endereco_id")
     private EnderecoModel endereco;
+
     @OneToMany (mappedBy = "pedido", cascade = CascadeType.ALL)
     private List <ItemPedidoModel> itemPedido;
+
     @OneToMany (mappedBy = "pedido",cascade = CascadeType.ALL)
     private List<StatusPedidoModel> statusPedido;
 

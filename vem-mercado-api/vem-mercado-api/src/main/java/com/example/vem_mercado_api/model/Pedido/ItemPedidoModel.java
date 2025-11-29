@@ -6,20 +6,24 @@ import jakarta.persistence.*;
 import java.text.DecimalFormat;
 
 @Entity
-@Table (name = "itemPedido")
+@Table (name = "item_pedido")
 public class ItemPedidoModel {
 
     @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column (nullable = false)
     private Integer quantidade;
+
     @Column (nullable = false, precision = 10, scale = 2)
     private DecimalFormat valorItem;
+
     @ManyToOne
-    @JoinColumn (name = "idProduto")
+    @JoinColumn (name = "produto_id")
     private ProdutoModel produto;
+
     @ManyToOne
-    @JoinColumn (name = "idPedido")
+    @JoinColumn (name = "pedido_id")
     private PedidoModel pedido;
 
     public ItemPedidoModel() {

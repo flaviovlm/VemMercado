@@ -12,28 +12,43 @@ public class ProdutoModel {
 
     @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column (nullable = false)
     private String nome;
-    @Column (nullable = false)
+
+    @Column (unique = true)
     private String ean;
-    @Column (nullable = false)
+
+    @Column
+    private String descricao;
+
+    @Column (nullable = false, unique = true)
     private String sku;
+
     @Column (nullable = false, precision = 10, scale = 2)
     private DecimalFormat valor;
+
     @Column (nullable = false)
-    private String categoria;
+    private Integer estoque;
+
+    @Enumerated (EnumType.STRING)
+    @Column
+    private Categoria categoria;
+
     @OneToMany
     private List<ItemPedidoModel> itemPedido;
 
     public ProdutoModel() {
     }
 
-    public ProdutoModel(Long id, String nome, String ean, String sku, DecimalFormat valor, String categoria, List<ItemPedidoModel> itemPedido) {
+    public ProdutoModel(Long id, String nome, String ean, String descricao, String sku, DecimalFormat valor, Integer estoque, Categoria categoria, List<ItemPedidoModel> itemPedido) {
         this.id = id;
         this.nome = nome;
         this.ean = ean;
+        this.descricao = descricao;
         this.sku = sku;
         this.valor = valor;
+        this.estoque = estoque;
         this.categoria = categoria;
         this.itemPedido = itemPedido;
     }
@@ -62,6 +77,14 @@ public class ProdutoModel {
         this.ean = ean;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     public String getSku() {
         return sku;
     }
@@ -78,11 +101,19 @@ public class ProdutoModel {
         this.valor = valor;
     }
 
-    public String getCategoria() {
+    public Integer getEstoque() {
+        return estoque;
+    }
+
+    public void setEstoque(Integer estoque) {
+        this.estoque = estoque;
+    }
+
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
