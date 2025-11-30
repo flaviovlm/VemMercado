@@ -4,7 +4,6 @@ import api.model.produto.ProdutoModel;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 
 @Entity
 @Table (name = "item_pedido")
