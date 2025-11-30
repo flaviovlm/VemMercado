@@ -31,11 +31,12 @@ public class EnderecoRequestDTO {
     public EnderecoRequestDTO() {
     }
 
-    public EnderecoRequestDTO(String logradouro, String numero, String cep, String estado, String cidade) {
+    public EnderecoRequestDTO(String logradouro, String numero, String cep, String estado, String bairro, String cidade) {
         this.logradouro = logradouro;
         this.numero = numero;
         this.cep = cep;
         this.estado = estado;
+        this.bairro = bairro;
         this.cidade = cidade;
     }
 
@@ -71,11 +72,19 @@ public class EnderecoRequestDTO {
         this.estado = estado;
     }
 
-    public @NotBlank(message = "O bairro é obrigatorio") @Size(min = 3, max = 40, message = "O bairro deve ter minimo 3 caracteres") @NotBlank(message = "A cidade é obrigatorio") @Size(min = 5, max = 40, message = "A cidade deve ter minimo 5 caracteres") String getCidade() {
+    public @NotBlank(message = "O bairro é obrigatorio") @Size(min = 3, max = 40, message = "O bairro deve ter minimo 3 caracteres") String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(@NotBlank(message = "O bairro é obrigatorio") @Size(min = 3, max = 40, message = "O bairro deve ter minimo 3 caracteres") String bairro) {
+        this.bairro = bairro;
+    }
+
+    public @NotBlank(message = "A cidade é obrigatorio") @Size(min = 5, max = 40, message = "A cidade deve ter minimo 5 caracteres") String getCidade() {
         return cidade;
     }
 
-    public void setCidade(@NotBlank(message = "O bairro é obrigatorio") @Size(min = 3, max = 40, message = "O bairro deve ter minimo 3 caracteres") @NotBlank(message = "A cidade é obrigatorio") @Size(min = 5, max = 40, message = "A cidade deve ter minimo 5 caracteres") String cidade) {
+    public void setCidade(@NotBlank(message = "A cidade é obrigatorio") @Size(min = 5, max = 40, message = "A cidade deve ter minimo 5 caracteres") String cidade) {
         this.cidade = cidade;
     }
 }
