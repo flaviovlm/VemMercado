@@ -18,7 +18,6 @@ public class ItemPedidoResponseDTO {
         this.nomeProduto = item.getProduto().getNome();
         this.valorItem = item.getValorItem();
         this.quantidade = item.getQuantidade();
-        this.subTotal = item.getValorItem().multiply(new BigDecimal(item.getQuantidade()));
     }
 
     public String getNomeProduto() {
