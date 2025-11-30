@@ -22,6 +22,7 @@ public class EnderecoRequestDTO {
 
     @NotBlank(message = "O bairro é obrigatorio")
     @Size(min = 3 , max = 40 , message = "O bairro deve ter minimo 3 caracteres")
+    private String bairro;
 
     @NotBlank(message = "A cidade é obrigatorio")
     @Size(min= 5 ,max = 40 , message = "A cidade deve ter minimo 5 caracteres")
