@@ -2,7 +2,7 @@
 CREATE DATABASE IF NOT EXISTS vem_mercado_db;
 USE vem_mercado_db;
 
--- 1. Tabela Usuário
+
 CREATE TABLE IF NOT EXISTS usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(80) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS usuario (
     telefone VARCHAR(11) NOT NULL UNIQUE
 );
 
--- 2. Tabela Endereço
+
 CREATE TABLE IF NOT EXISTS endereco (
     id INT AUTO_INCREMENT PRIMARY KEY,
     logradouro VARCHAR(100) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS endereco (
     FOREIGN KEY (usuario_id) REFERENCES usuario(id)
 );
 
--- 3. Tabela Produto
+
 CREATE TABLE IF NOT EXISTS produto (
     id INT AUTO_INCREMENT PRIMARY KEY, 
     nome VARCHAR(100) NOT NULL,
@@ -34,10 +34,10 @@ CREATE TABLE IF NOT EXISTS produto (
     sku VARCHAR(50) NOT NULL UNIQUE, 
     valor DECIMAL(10, 2) NOT NULL, 
     estoque INT DEFAULT 0,
-    categoria ENUM ('UTILIDADES', 'LIMPEZA', 'HORTOLICAS', 'DERMOCOSMETICOS')
+    categoria ENUM ('UTILIDADES', 'LIMPEZA', 'HORTOLICAS', 'DERMOCOSMETICOS', 'ELETRONICOS')
 );
 
--- 4. Tabela Pedido
+
 CREATE TABLE IF NOT EXISTS pedido (
     id INT AUTO_INCREMENT PRIMARY KEY,
     dataCriacao DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -50,25 +50,15 @@ CREATE TABLE IF NOT EXISTS pedido (
     FOREIGN KEY (endereco_id) REFERENCES endereco(id)
 );
 
--- 5. Tabela Itens do Pedido (N:N)
+
 CREATE TABLE IF NOT EXISTS item_pedido (
     id INT AUTO_INCREMENT PRIMARY KEY,
     quantidade INT NOT NULL,
-    valorItem DECIMAL(10, 2) NOT NULL, -- Preço "congelado" no momento da compra
+    valorItem DECIMAL(10, 2) NOT NULL,
     
     pedido_id INT NOT NULL,
     produto_id INT NOT NULL,
     
     FOREIGN KEY (pedido_id) REFERENCES pedido(id),
     FOREIGN KEY (produto_id) REFERENCES produto(id)
-);
-
--- 6. Histórico de Status do Pedido
-CREATE TABLE IF NOT EXISTS status_pedido (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    statusPedido ENUM('AGUARDANDO_PAGAMENTO', 'PAGO', 'SEPARACAO', 'ENVIADO', 'ENTREGUE', 'CANCELADO') NOT NULL,
-    dataHora DATETIME DEFAULT CURRENT_TIMESTAMP,
-    
-    pedido_id INT NOT NULL,
-    FOREIGN KEY (pedido_id) REFERENCES pedido(id)
 );
