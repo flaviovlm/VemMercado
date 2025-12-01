@@ -1,14 +1,22 @@
 package api.service;
 
 import api.dto.itemPedidoDTO.ItemPedidoResponseDTO;
+import api.dto.pedidoDTO.PedidoRequestDTO;
 import api.dto.pedidoDTO.PedidoResponseDTO;
 import api.model.UsuarioModel;
+import api.model.endereco.EnderecoModel;
+import api.model.pedido.ItemPedidoModel;
 import api.model.pedido.PedidoModel;
+import api.model.produto.ProdutoModel;
+import api.repository.EnderecoRepository;
 import api.repository.PedidoRepository;
+import api.repository.ProdutoRepository;
 import api.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -19,6 +27,12 @@ public class PedidoService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
     public List<PedidoResponseDTO> listarTodos() {
         return pedidoRepository
@@ -57,6 +71,45 @@ public class PedidoService {
                         pedido.getValorPedido()
                 ))
                 .toList();
+    }
+
+    public PedidoResponseDTO salvar(PedidoRequestDTO dto) {
+
+        UsuarioModel usuario = usuarioRepository.findById(dto.getUsuarioId())
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+        EnderecoModel endereco = enderecoRepository.findById(dto.getEnderecoEntregaId())
+                .orElseThrow(() -> new RuntimeException("Endereço de entrega não encontrado"));
+
+        PedidoModel pedido = new PedidoModel();
+        pedido.setUsuario(usuario);
+        pedido.setEndereco(endereco);
+        pedido.setDataCriacao(LocalDateTime.now());
+
+        List<ItemPedidoModel> itens = dto.getItens().stream().map(itemDTO -> {
+            ProdutoModel produto = produtoRepository.findById(itemDTO.getIdProduto())
+                    .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+            ItemPedidoModel item = new ItemPedidoModel();
+            item.setPedido(pedido);
+            item.setProduto(produto);
+            item.setQuantidade(itemDTO.getQuantidade());
+            item.setValorItem(produto.getValor());
+
+            return item;
+        }).toList();
+
+        pedido.setItemPedido(itens);
+
+        BigDecimal total = itens.stream()
+                .map(i -> i.getValorItem().multiply(BigDecimal.valueOf(i.getQuantidade())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        pedido.setValorPedido(total);
+
+        PedidoModel novoPedido = pedidoRepository.save(pedido);
+
+        return new PedidoResponseDTO(novoPedido);
     }
 
 }

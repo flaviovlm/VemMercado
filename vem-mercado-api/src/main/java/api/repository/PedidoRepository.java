@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface PedidoRepository extends JpaRepository <PedidoModel, Long> {
     List<PedidoModel> findByUsuario(UsuarioModel usuario);
+    List<PedidoModel> findByUsuarioId(Long usuarioId);
 }
