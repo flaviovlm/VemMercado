@@ -23,7 +23,8 @@ public class ProdutoService {
                         produtoModel.getNome(),
                         produtoModel.getDescricao(),
                         produtoModel.getValor(),
-                        produtoModel.getCategoria()
+                        produtoModel.getCategoria(),
+                        produtoModel.getImagem()
                 ))
                 .toList();
     }
@@ -35,7 +36,8 @@ public class ProdutoService {
                         produto.getNome(),
                         produto.getDescricao(),
                         produto.getValor(),
-                        produto.getCategoria()
+                        produto.getCategoria(),
+                        produto.getImagem()
                 ))
                 .toList();
     }
@@ -52,6 +54,7 @@ public class ProdutoService {
         produto.setValor(produtoRequestDTO.getValor());
         produto.setEstoque(produtoRequestDTO.getEstoque());
         produto.setCategoria(produtoRequestDTO.getCategoria());
+        produto.setImagem(produtoRequestDTO.getImagem());
 
         produtoRepository.save(produto);
         return produto;
@@ -69,6 +72,7 @@ public class ProdutoService {
         produtoExistente.setValor(dto.getValor());
         produtoExistente.setEstoque(dto.getEstoque());
         produtoExistente.setCategoria(dto.getCategoria());
+        produtoExistente.setImagem(dto.getImagem());
 
         return produtoRepository.save(produtoExistente);
     }

@@ -10,15 +10,17 @@ public class ProdutoResponseDTO {
     private String descricao;
     private BigDecimal valor;
     private Categoria categoria;
+    private String imagem;
 
     public ProdutoResponseDTO() {
     }
 
-    public ProdutoResponseDTO(String nome, String descricao, BigDecimal valor, Categoria categoria) {
+    public ProdutoResponseDTO(String nome, String descricao, BigDecimal valor, Categoria categoria, String imagem) {
         this.nome = nome;
         this.descricao = descricao;
         this.valor = valor;
         this.categoria = categoria;
+        this.imagem = imagem;
     }
 
     public String getNome() {
@@ -51,5 +53,13 @@ public class ProdutoResponseDTO {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 }

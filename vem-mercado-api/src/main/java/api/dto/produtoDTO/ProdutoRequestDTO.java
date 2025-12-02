@@ -34,7 +34,21 @@ public class ProdutoRequestDTO {
     @NotNull(message = "É necessário inserir a categoria do produto.")
     private Categoria categoria;
 
+    @NotNull(message = "A imagem do produto é obrigatória")
+    private String imagem;
+
     public ProdutoRequestDTO() {
+    }
+
+    public ProdutoRequestDTO(String nome, String ean, String descricao, String sku, BigDecimal valor, Integer estoque, Categoria categoria, String imagem) {
+        this.nome = nome;
+        this.ean = ean;
+        this.descricao = descricao;
+        this.sku = sku;
+        this.valor = valor;
+        this.estoque = estoque;
+        this.categoria = categoria;
+        this.imagem = imagem;
     }
 
     public @NotBlank(message = "É necessário inserir o nome do produto.") @Size(max = 100) String getNome() {
@@ -91,5 +105,13 @@ public class ProdutoRequestDTO {
 
     public void setCategoria(@NotNull(message = "É necessário inserir a categoria do produto.") Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public @NotNull(message = "A imagem do produto é obrigatória") String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(@NotNull(message = "A imagem do produto é obrigatória") String imagem) {
+        this.imagem = imagem;
     }
 }

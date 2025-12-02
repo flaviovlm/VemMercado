@@ -36,13 +36,16 @@ public class ProdutoModel {
     @Column
     private Categoria categoria;
 
+    @Column(nullable = false)
+    private String imagem;
+
     @OneToMany(mappedBy = "produto")
     private List<ItemPedidoModel> itemPedido;
 
     public ProdutoModel() {
     }
 
-    public ProdutoModel(Long id, String nome, String ean, String descricao, String sku, BigDecimal valor, Integer estoque, Categoria categoria, List<ItemPedidoModel> itemPedido) {
+    public ProdutoModel(Long id, String nome, String ean, String descricao, String sku, BigDecimal valor, Integer estoque, Categoria categoria, String imagem, List<ItemPedidoModel> itemPedido) {
         this.id = id;
         this.nome = nome;
         this.ean = ean;
@@ -51,6 +54,7 @@ public class ProdutoModel {
         this.valor = valor;
         this.estoque = estoque;
         this.categoria = categoria;
+        this.imagem = imagem;
         this.itemPedido = itemPedido;
     }
 
@@ -116,6 +120,14 @@ public class ProdutoModel {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 
     public List<ItemPedidoModel> getItemPedido() {
