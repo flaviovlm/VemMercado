@@ -26,11 +26,14 @@ public class ProdutoController {
                 .body(produtoService.listarTodos());
     }
 
-    @GetMapping("/nome")
-    public ResponseEntity<List<ProdutoResponseDTO>> listarProdutosPeloNome(String nome) {
-        return ResponseEntity
-                .ok()
-                .body(produtoService.buscarPorNome(nome));
+    @GetMapping
+    public ResponseEntity<List<ProdutoResponseDTO>> buscarProdutos(@RequestParam(required = false) String nome) {
+
+        if (nome == null || nome.isBlank()) {
+            return ResponseEntity.ok(produtoService.listarTodos());
+        }
+
+        return ResponseEntity.ok(produtoService.buscarPorNome(nome));
     }
 
     @PostMapping("/adicionar")
