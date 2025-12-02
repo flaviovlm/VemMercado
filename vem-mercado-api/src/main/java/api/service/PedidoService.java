@@ -126,7 +126,7 @@ public class PedidoService {
     }
 
     public PedidoModel deletar(Long pedidoId) {
-        
+
         PedidoModel pedido = pedidoRepository.findById(pedidoId)
                 .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
 

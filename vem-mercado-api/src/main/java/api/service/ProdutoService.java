@@ -2,6 +2,7 @@ package api.service;
 
 import api.dto.produtoDTO.ProdutoRequestDTO;
 import api.dto.produtoDTO.ProdutoResponseDTO;
+import api.exception.EanExistenteException;
 import api.model.produto.ProdutoModel;
 import api.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class ProdutoService {
 
     public ProdutoModel salvar(ProdutoRequestDTO produtoRequestDTO) {
         if (produtoRepository.findByEan(produtoRequestDTO.getEan()).isPresent()) {
-            throw new IllegalArgumentException("Este produto já está cadastrado.");
+            throw new EanExistenteException("Este produto já está cadastrado.");
         }
         ProdutoModel produto = new ProdutoModel();
         produto.setNome(produtoRequestDTO.getNome());
