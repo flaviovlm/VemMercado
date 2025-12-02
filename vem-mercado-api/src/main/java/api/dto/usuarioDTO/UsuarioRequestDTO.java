@@ -21,7 +21,7 @@ public class UsuarioRequestDTO {
     private String email;
 
     @NotBlank(message = "A senha é obrigatoria")
-    @Size(min = 3 , max = 10 , message = "A senha deve ter minimo 10 caracteres")
+    @Size(min = 3 , max = 10 , message = "A senha deve ter entre 3 e 10 caracteres.")
     private String senha;
 
     @NotBlank(message = "O CPF é obrigatorio")
