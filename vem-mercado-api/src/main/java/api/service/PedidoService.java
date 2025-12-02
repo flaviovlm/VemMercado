@@ -7,6 +7,7 @@ import api.model.UsuarioModel;
 import api.model.endereco.EnderecoModel;
 import api.model.pedido.ItemPedidoModel;
 import api.model.pedido.PedidoModel;
+import api.model.pedido.Status;
 import api.model.produto.ProdutoModel;
 import api.repository.EnderecoRepository;
 import api.repository.PedidoRepository;
@@ -35,6 +36,7 @@ public class PedidoService {
     private EnderecoRepository enderecoRepository;
 
     public List<PedidoResponseDTO> listarTodos() {
+
         return pedidoRepository
                 .findAll()
                 .stream()
@@ -53,6 +55,7 @@ public class PedidoService {
     }
 
     public List<PedidoResponseDTO> listarPedidosDoUsuario(Long usuarioId) {
+
         UsuarioModel usuario = usuarioRepository.findById(usuarioId)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
@@ -110,6 +113,35 @@ public class PedidoService {
         PedidoModel novoPedido = pedidoRepository.save(pedido);
 
         return new PedidoResponseDTO(novoPedido);
+    }
+
+    public PedidoModel atualizarStatus(Long idPedido, Status novoStatus) {
+
+        PedidoModel pedido = pedidoRepository.findById(idPedido)
+                .orElseThrow(() -> new RuntimeException("Este pedido não existe."));
+
+        pedido.setStatusPedido(novoStatus);
+
+        return pedidoRepository.save(pedido);
+    }
+
+    public PedidoModel deletar(Long pedidoId) {
+        
+        PedidoModel pedido = pedidoRepository.findById(pedidoId)
+                .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+
+        if (pedido.getStatusPedido() == Status.ENTREGUE) {
+            throw new RuntimeException("Não é possível cancelar um pedido que já foi entregue.");
+        }
+
+        // Já está cancelado — simplesmente retorna (idempotência)
+        if (pedido.getStatusPedido() == Status.CANCELADO) {
+            return pedido;
+        }
+
+        pedido.setStatusPedido(Status.CANCELADO);
+
+        return pedidoRepository.save(pedido);
     }
 
 }
