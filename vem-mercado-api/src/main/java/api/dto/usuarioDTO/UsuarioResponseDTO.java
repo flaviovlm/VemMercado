@@ -6,6 +6,7 @@ import java.util.List;
 
 
 public class UsuarioResponseDTO {
+    private Long id;
     private String nome;
     private String email;
     private String cpf;
@@ -15,12 +16,21 @@ public class UsuarioResponseDTO {
     public UsuarioResponseDTO() {
     }
 
-    public UsuarioResponseDTO(String nome, String email, String cpf, String telefone, List<EnderecoResponseDTO> enderecos) {
+    public UsuarioResponseDTO(Long id, String nome, String email, String cpf, String telefone, List<EnderecoResponseDTO> enderecos) {
+        this.id = id;
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
         this.telefone = telefone;
         this.enderecos = enderecos;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {

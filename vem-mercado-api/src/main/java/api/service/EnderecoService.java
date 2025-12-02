@@ -27,7 +27,7 @@ public class EnderecoService {
         return enderecoRepository
                 .findAll()
                 .stream()
-                .map(enderecoModel -> new EnderecoResponseDTO(enderecoModel.getLogradouro() , enderecoModel.getNumero() , enderecoModel.getCep() , enderecoModel.getEstado() , enderecoModel.getBairro() , enderecoModel.getCidade()))
+                .map(enderecoModel -> new EnderecoResponseDTO(enderecoModel))
                 .toList();
     }
 

@@ -4,6 +4,7 @@ import api.model.endereco.EnderecoModel;
 import api.model.pedido.PedidoModel;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
