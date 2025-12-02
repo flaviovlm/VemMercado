@@ -23,22 +23,22 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping ("/buscar/{cpf}")
-    public ResponseEntity <UsuarioResponseDTO> searchCpf(@PathVariable String cpf){
+    public ResponseEntity <UsuarioResponseDTO> buscarUsuario(@PathVariable String cpf){
 
-        UsuarioResponseDTO usuarioEncontrado =  usuarioService.searchUser(cpf);
+        UsuarioResponseDTO usuarioEncontrado =  usuarioService.buscarUsuario(cpf);
         return ResponseEntity.ok().body(usuarioEncontrado);
 
     }
 
     @PostMapping ("/cadastro")
-    public ResponseEntity <UsuarioResponseDTO> cadastroUser (@RequestBody @Valid UsuarioRequestDTO requestDTO){
-        UsuarioResponseDTO usuarioNovo =  usuarioService.createUser(requestDTO);
+    public ResponseEntity <UsuarioResponseDTO> salvarUsuario (@RequestBody @Valid UsuarioRequestDTO requestDTO){
+        UsuarioResponseDTO usuarioNovo =  usuarioService.salvarUsuario(requestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioNovo);
     }
 
     @PostMapping("/login")
-    public ResponseEntity <Map<String, Object>> loginUser (@RequestBody @Valid UsuarioLoginRequestDTO loginRequestDTO){
-        UsuarioResponseDTO usuarioLogado =  usuarioService.loginUser(loginRequestDTO);
+    public ResponseEntity <Map<String, Object>> loginUsuario (@RequestBody @Valid UsuarioLoginRequestDTO loginRequestDTO){
+        UsuarioResponseDTO usuarioLogado =  usuarioService.loginUsuario(loginRequestDTO);
         return ResponseEntity.ok().body(Map.of("message: ","Bem - vindo " +usuarioLogado.getNome() , "success", true));
 
     }
