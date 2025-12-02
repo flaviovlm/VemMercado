@@ -34,7 +34,7 @@ public class UsuarioService {
     private BCryptPasswordEncoder passwordEncoder;
 
 
-    public UsuarioResponseDTO createUser(UsuarioRequestDTO dto){
+    public UsuarioResponseDTO salvarUsuario(UsuarioRequestDTO dto){
 
         if (usuarioRepository.findByEmail(dto.getEmail()).isPresent()){
             throw new EmailUtilizadoException("Email já utilizado!");
@@ -90,7 +90,7 @@ public class UsuarioService {
         );
     }
 
-    public UsuarioResponseDTO loginUser (UsuarioLoginRequestDTO loginRequestDTO){
+    public UsuarioResponseDTO loginUsuario (UsuarioLoginRequestDTO loginRequestDTO){
 
         UsuarioModel modelUser = usuarioRepository.findByEmail(loginRequestDTO.getEmail())
                 .orElseThrow(() -> new EmailSenhaInvalidoException("Email ou senha inválido!"));
@@ -114,7 +114,7 @@ public class UsuarioService {
 
     }
 
-    public UsuarioResponseDTO searchUser (String cpf){
+    public UsuarioResponseDTO buscarUsuario (String cpf){
         UsuarioModel modelUser = usuarioRepository.findByCpf(cpf)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
 
