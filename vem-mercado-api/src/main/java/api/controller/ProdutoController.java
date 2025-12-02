@@ -20,13 +20,6 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @GetMapping
-    public ResponseEntity<List<ProdutoResponseDTO>> listarTodosProdutos() {
-        return ResponseEntity
-                .ok()
-                .body(produtoService.listarTodos());
-    }
-
-    @GetMapping
     public ResponseEntity<List<ProdutoResponseDTO>> buscarProdutos(@RequestParam(required = false) String nome) {
 
         if (nome == null || nome.isBlank()) {
