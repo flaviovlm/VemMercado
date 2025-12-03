@@ -35,9 +35,13 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity <Map<String, Object>> loginUsuario (@RequestBody @Valid UsuarioLoginRequestDTO loginRequestDTO){
-        UsuarioResponseDTO usuarioLogado =  usuarioService.loginUsuario(loginRequestDTO);
-        return ResponseEntity.ok().body(Map.of("message", "Bem-vindo " + usuarioLogado.getNome(), "success", true));
+    public ResponseEntity<Map<String, Object>> loginUsuario(@RequestBody @Valid UsuarioLoginRequestDTO loginRequestDTO){
+        UsuarioResponseDTO usuarioLogado = usuarioService.loginUsuario(loginRequestDTO);
+        return ResponseEntity.ok().body(Map.of(
+                "message", "Bem-vindo " + usuarioLogado.getNome(),
+                "success", true,
+                "usuario", usuarioLogado  // ← ADICIONAR O OBJETO COMPLETO
+        ));
     }
 
     @PutMapping("/atualizar/{id}")
