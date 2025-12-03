@@ -32,7 +32,7 @@ public class ProdutoController {
     @PostMapping("/adicionar")
     public ResponseEntity<Map<String, Object>> adicionarProduto(@RequestBody @Valid ProdutoRequestDTO requestDTO) {
         produtoService.salvar(requestDTO);
-        return ResponseEntity.created(null).body(Map.of("message", "produto adicionado com sucesso.", "sucesso", true));
+        return ResponseEntity.created(null).body(Map.of("message", "Produto salvo.", "success", true));
     }
 
     @PutMapping("/atualizar/{id}")
@@ -42,7 +42,7 @@ public class ProdutoController {
         produtoService.atualizar(id, requestDTO);
         return ResponseEntity
                 .ok()
-                .body(Map.of("message", "produto atualizado com sucesso.", "sucesso", true));
+                .body(Map.of("message", "Produto atualizado.", "success", true));
     }
 
     @DeleteMapping("/deletar/{id}")

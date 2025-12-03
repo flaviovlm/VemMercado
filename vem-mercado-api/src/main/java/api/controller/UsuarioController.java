@@ -40,6 +40,5 @@ public class UsuarioController {
     public ResponseEntity <Map<String, Object>> loginUsuario (@RequestBody @Valid UsuarioLoginRequestDTO loginRequestDTO){
         UsuarioResponseDTO usuarioLogado =  usuarioService.loginUsuario(loginRequestDTO);
         return ResponseEntity.ok().body(Map.of("message: ","Bem - vindo " +usuarioLogado.getNome() , "success", true));
-
     }
 }
