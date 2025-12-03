@@ -3,6 +3,7 @@ package api.dto.enderecoDTO;
 import api.model.endereco.EnderecoModel;
 
 public class EnderecoResponseDTO {
+    private Long id;
     private String logradouro;
     private String numero;
     private String cep;
@@ -14,12 +15,21 @@ public class EnderecoResponseDTO {
     }
 
     public EnderecoResponseDTO(EnderecoModel enderecoModel) {
+        this.id = enderecoModel.getId();
         this.logradouro = enderecoModel.getLogradouro();
         this.numero = enderecoModel.getNumero();
         this.cep = enderecoModel.getCep();
         this.estado = enderecoModel.getEstado();
         this.bairro = enderecoModel.getBairro();
         this.cidade = enderecoModel.getCidade();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getLogradouro() {

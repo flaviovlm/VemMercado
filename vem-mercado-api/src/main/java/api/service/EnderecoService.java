@@ -20,12 +20,11 @@ public class EnderecoService {
     private UsuarioRepository usuarioRepository;
 
     public List<EnderecoResponseDTO> listarEndereco(Long usuarioId){
-
-        UsuarioModel usuario = usuarioRepository.findById(usuarioId)
+        // valida usuário
+        usuarioRepository.findById(usuarioId)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
-        return enderecoRepository
-                .findAll()
+        return enderecoRepository.findByUsuarioId(usuarioId)
                 .stream()
                 .map(enderecoModel -> new EnderecoResponseDTO(enderecoModel))
                 .toList();

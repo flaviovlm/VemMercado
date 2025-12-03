@@ -21,6 +21,7 @@ public class ProdutoService {
                 .findAll()
                 .stream()
                 .map(produtoModel -> new ProdutoResponseDTO(
+                        produtoModel.getId(),
                         produtoModel.getNome(),
                         produtoModel.getDescricao(),
                         produtoModel.getValor(),
@@ -34,6 +35,7 @@ public class ProdutoService {
         return produtoRepository.findByNomeContainingIgnoreCase(nome)
                 .stream()
                 .map(produto -> new ProdutoResponseDTO(
+                        produto.getId(),
                         produto.getNome(),
                         produto.getDescricao(),
                         produto.getValor(),

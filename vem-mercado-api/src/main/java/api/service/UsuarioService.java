@@ -3,6 +3,7 @@ package api.service;
 import api.dto.enderecoDTO.EnderecoRequestDTO;
 import api.dto.enderecoDTO.EnderecoResponseDTO;
 import api.dto.usuarioDTO.UsuarioLoginRequestDTO;
+import api.dto.usuarioDTO.UsuarioPatchDTO;
 import api.dto.usuarioDTO.UsuarioRequestDTO;
 import api.dto.usuarioDTO.UsuarioResponseDTO;
 import api.exception.CpfExistenteException;
@@ -128,37 +129,38 @@ public class UsuarioService {
         );
     }
 
-    public UsuarioResponseDTO atualizarUsuario (UsuarioRequestDTO requestDTO, Long id){
-        UsuarioModel usuarioExistente = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
+    public void atualizarParcial(Long id, UsuarioPatchDTO patchDTO) {
+        UsuarioModel usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
-        if (!passwordEncoder.matches(requestDTO.getSenha(), usuarioExistente.getSenha())){
-            throw new EmailSenhaInvalidoException("Senha incorreta. Não autorizado!");
+        if (patchDTO.getNome() != null) {
+            usuario.setNome(patchDTO.getNome());
         }
 
-        usuarioExistente.setNome(requestDTO.getNome());
+        if (patchDTO.getEmail() != null) {
+            usuarioRepository.findByEmail(patchDTO.getEmail()).ifPresent(u -> {
+                if (!u.getId().equals(id)) {
+                    throw new RuntimeException("Este e-mail já está em uso");
+                }
+            });
 
-        if (!usuarioExistente.getEmail().equals(requestDTO.getEmail())){
-            if (usuarioRepository.findByEmail(requestDTO.getEmail()).isPresent()) {
-                throw new RuntimeException("Email em uso, tente novamente!");
-            }
-            usuarioExistente.setEmail(requestDTO.getEmail());
+            usuario.setEmail(patchDTO.getEmail());
         }
 
-        usuarioExistente.setTelefone(requestDTO.getTelefone());
-        usuarioExistente =  usuarioRepository.save(usuarioExistente);
+        if (patchDTO.getTelefone() != null) {
+            usuarioRepository.findByTelefone(patchDTO.getTelefone()).ifPresent(u -> {
+                if (!u.getId().equals(id)) {
+                    throw new RuntimeException("Este telefone já está em uso");
+                }
+            });
 
-        return new UsuarioResponseDTO(
-                usuarioExistente.getId(),
-                usuarioExistente.getNome(),
-                usuarioExistente.getEmail(),
-                usuarioExistente.getCpf(),
-                usuarioExistente.getTelefone(),
-                usuarioExistente.getEndereco().stream()
-                        .map(enderecoModel -> new EnderecoResponseDTO(enderecoModel))
-                        .collect(Collectors.toList())
-        );
+            usuario.setTelefone(patchDTO.getTelefone());
+        }
 
+        if (patchDTO.getSenha() != null) {
+            usuario.setSenha(passwordEncoder.encode(patchDTO.getSenha()));
+        }
 
+        usuarioRepository.save(usuario);
     }
 }

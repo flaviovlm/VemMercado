@@ -88,6 +88,7 @@ public class PedidoService {
         pedido.setUsuario(usuario);
         pedido.setEndereco(endereco);
         pedido.setDataCriacao(LocalDateTime.now());
+        pedido.setStatusPedido(Status.SEPARACAO);
 
         List<ItemPedidoModel> itens = dto.getItens().stream().map(itemDTO -> {
             ProdutoModel produto = produtoRepository.findById(itemDTO.getIdProduto())

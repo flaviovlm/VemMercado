@@ -29,7 +29,7 @@ public class UsuarioModel {
     @Column(nullable = false , unique = true)
     private String telefone;
 
-    @OneToMany (mappedBy = "usuario",cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "usuario",cascade = CascadeType.PERSIST)
     private List<EnderecoModel> endereco;
 
     @OneToMany(mappedBy = "usuario")
