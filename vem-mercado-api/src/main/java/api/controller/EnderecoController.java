@@ -14,6 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/usuarios/{usuarioId}/enderecos")
+@CrossOrigin("http://localhost:5173/")
 public class EnderecoController {
 
     @Autowired

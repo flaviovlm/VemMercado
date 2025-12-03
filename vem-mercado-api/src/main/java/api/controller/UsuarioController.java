@@ -14,7 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping ("/usuarios")
-
+@CrossOrigin("http://localhost:5173/")
 public class UsuarioController {
 
     @Autowired
@@ -37,7 +37,7 @@ public class UsuarioController {
     @PostMapping("/login")
     public ResponseEntity <Map<String, Object>> loginUsuario (@RequestBody @Valid UsuarioLoginRequestDTO loginRequestDTO){
         UsuarioResponseDTO usuarioLogado =  usuarioService.loginUsuario(loginRequestDTO);
-        return ResponseEntity.ok().body(Map.of("message ","Bem - vindo " +usuarioLogado.getNome() , "success", true));
+        return ResponseEntity.ok().body(Map.of("message", "Bem-vindo " + usuarioLogado.getNome(), "success", true));
     }
 
     @PutMapping("/atualizar/{id}")
