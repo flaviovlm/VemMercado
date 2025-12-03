@@ -31,9 +31,9 @@ public class UsuarioController {
     }
 
     @PostMapping ("/cadastro")
-    public ResponseEntity <UsuarioResponseDTO> salvarUsuario (@RequestBody @Valid UsuarioRequestDTO requestDTO){
-        UsuarioResponseDTO usuarioNovo =  usuarioService.salvarUsuario(requestDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioNovo);
+    public ResponseEntity<Map<String , Object>> salvarUsuario (@RequestBody @Valid UsuarioRequestDTO usuario){
+        usuarioService.salvarUsuario(usuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "Usuário salvo" , "success",true));
     }
 
     @PostMapping("/login")
