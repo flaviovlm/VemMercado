@@ -13,24 +13,33 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/enderecos")
+@RequestMapping("/usuarios/{usuarioId}/enderecos")
 public class EnderecoController {
+
     @Autowired
     private EnderecoService enderecoService;
 
-    @GetMapping("/listar/{id}")
-    public ResponseEntity<List<EnderecoResponseDTO>> listarEndereco(@PathVariable Long usuarioId){
-        return ResponseEntity.status(HttpStatus.OK).body(enderecoService.listarEndereco(usuarioId));
+
+    @GetMapping
+    public ResponseEntity<List<EnderecoResponseDTO>> listarEnderecos(@PathVariable Long usuarioId) {
+        return ResponseEntity.ok(enderecoService.listarEndereco(usuarioId));
     }
 
-    @PostMapping("/salvar")
-    public ResponseEntity<Map<String , Object>> salvarEndereco(@Valid @PathVariable Long usuarioId , @RequestBody EnderecoRequestDTO endereco){
-        enderecoService.salvarEndereco(usuarioId,endereco);
-        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message: " , "Endereço salvo" , "sucesse: ", true));
+    @PostMapping
+    public ResponseEntity<Map<String, Object>> salvarEndereco(@PathVariable Long usuarioId, @Valid @RequestBody EnderecoRequestDTO endereco) {
+        enderecoService.salvarEndereco(usuarioId, endereco);
+        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "Endereço salvo", "success", true));
     }
 
-    @PutMapping("/atualizar")
-    public ResponseEntity<Map<String , Object>> atualizarEndereco(@)
+    @PutMapping("/{enderecoId}")
+    public ResponseEntity<Map<String, Object>> atualizarEndereco(@PathVariable Long usuarioId, @PathVariable Long enderecoId, @Valid @RequestBody EnderecoRequestDTO endereco) {
+        enderecoService.atualizarEndereco(usuarioId, enderecoId, endereco);
+        return ResponseEntity.ok(Map.of("message", "Endereço atualizado", "success", true));
+    }
 
-
+    @DeleteMapping("/{enderecoId}")
+    public ResponseEntity<Map<String, Object>> deletarEndereco(@PathVariable Long usuarioId, @PathVariable Long enderecoId) {
+        enderecoService.deletarEndereco(usuarioId, enderecoId);
+        return ResponseEntity.ok(Map.of("message", "Endereço deletado", "success", true));
+    }
 }
