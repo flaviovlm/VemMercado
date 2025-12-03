@@ -128,7 +128,7 @@ public class UsuarioService {
         );
     }
 
-    public UsuarioResponseDTO updateUsuario (UsuarioRequestDTO requestDTO, Long id){
+    public UsuarioResponseDTO atualizarUsuario (UsuarioRequestDTO requestDTO, Long id){
         UsuarioModel usuarioExistente = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
 

@@ -41,9 +41,8 @@ public class UsuarioController {
     }
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity <Map<String, Object>> updateUser (@RequestBody @Valid UsuarioRequestDTO requestDTO
-                                                            , @PathVariable Long id){
-        usuarioService.updateUsuario(requestDTO, id);
-        return ResponseEntity.ok().body(Map.of("message", "Atualizado com sucesso!", "success", true));
+    public ResponseEntity <Map<String, Object>> atualizarUsuario (@RequestBody @Valid UsuarioRequestDTO requestDTO, @PathVariable Long id){
+        usuarioService.atualizarUsuario(requestDTO, id);
+        return ResponseEntity.ok().body(Map.of("message", "Usuário atualizado", "success", true));
     }
 }
