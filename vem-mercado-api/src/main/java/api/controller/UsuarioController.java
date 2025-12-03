@@ -41,4 +41,11 @@ public class UsuarioController {
         UsuarioResponseDTO usuarioLogado =  usuarioService.loginUsuario(loginRequestDTO);
         return ResponseEntity.ok().body(Map.of("message: ","Bem - vindo " +usuarioLogado.getNome() , "success", true));
     }
+
+    @PutMapping("/atualizar/{id}")
+    public ResponseEntity <Map<String, Object>> updateUser (@RequestBody @Valid UsuarioRequestDTO requestDTO
+                                                            , @PathVariable Long id){
+        usuarioService.updateUsuario(requestDTO, id);
+        return ResponseEntity.ok().body(Map.of("message: ", "Atualizado com sucesso!", "success", true));
+    }
 }

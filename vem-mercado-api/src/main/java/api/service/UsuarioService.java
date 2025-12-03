@@ -110,8 +110,6 @@ public class UsuarioService {
                         .collect(Collectors.toList())
 
         );
-
-
     }
 
     public UsuarioResponseDTO buscarUsuario (String cpf){
@@ -128,5 +126,39 @@ public class UsuarioService {
                         .map(enderecoModel -> new EnderecoResponseDTO(enderecoModel))
                         .collect(Collectors.toList())
         );
+    }
+
+    public UsuarioResponseDTO updateUsuario (UsuarioRequestDTO requestDTO, Long id){
+        UsuarioModel usuarioExistente = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
+
+        if (!passwordEncoder.matches(requestDTO.getSenha(), usuarioExistente.getSenha())){
+            throw new EmailSenhaInvalidoException("Senha incorreta. Não autorizado!");
+        }
+
+        usuarioExistente.setNome(requestDTO.getNome());
+
+        if (!usuarioExistente.getEmail().equals(requestDTO.getEmail())){
+            if (usuarioRepository.findByEmail(requestDTO.getEmail()).isPresent()) {
+                throw new RuntimeException("Email em uso, tente novamente!");
+            }
+            usuarioExistente.setEmail(requestDTO.getEmail());
+        }
+
+        usuarioExistente.setTelefone(requestDTO.getTelefone());
+        usuarioExistente =  usuarioRepository.save(usuarioExistente);
+
+        return new UsuarioResponseDTO(
+                usuarioExistente.getId(),
+                usuarioExistente.getNome(),
+                usuarioExistente.getEmail(),
+                usuarioExistente.getCpf(),
+                usuarioExistente.getTelefone(),
+                usuarioExistente.getEndereco().stream()
+                        .map(enderecoModel -> new EnderecoResponseDTO(enderecoModel))
+                        .collect(Collectors.toList())
+        );
+
+
     }
 }
