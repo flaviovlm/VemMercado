@@ -2,7 +2,6 @@ package api.controller;
 
 import api.dto.produtoDTO.ProdutoRequestDTO;
 import api.dto.produtoDTO.ProdutoResponseDTO;
-import api.model.produto.ProdutoModel;
 import api.service.ProdutoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

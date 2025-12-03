@@ -3,7 +3,6 @@ package api.controller;
 import api.dto.usuarioDTO.UsuarioLoginRequestDTO;
 import api.dto.usuarioDTO.UsuarioRequestDTO;
 import api.dto.usuarioDTO.UsuarioResponseDTO;
-import api.model.UsuarioModel;
 import api.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -46,6 +44,6 @@ public class UsuarioController {
     public ResponseEntity <Map<String, Object>> updateUser (@RequestBody @Valid UsuarioRequestDTO requestDTO
                                                             , @PathVariable Long id){
         usuarioService.updateUsuario(requestDTO, id);
-        return ResponseEntity.ok().body(Map.of("message ", "Atualizado com sucesso!", "success", true));
+        return ResponseEntity.ok().body(Map.of("message", "Atualizado com sucesso!", "success", true));
     }
 }
