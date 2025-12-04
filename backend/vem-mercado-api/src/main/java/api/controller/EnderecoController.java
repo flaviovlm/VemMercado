@@ -26,7 +26,7 @@ public class EnderecoController {
         return ResponseEntity.ok(enderecoService.listarEndereco(usuarioId));
     }
 
-    @PostMapping
+    @PostMapping("/{usuarioId}")
     public ResponseEntity<Map<String, Object>> salvarEndereco(@PathVariable Long usuarioId, @Valid @RequestBody EnderecoRequestDTO endereco) {
         enderecoService.salvarEndereco(usuarioId, endereco);
         return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "Endereço salvo", "success", true));

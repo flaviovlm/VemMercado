@@ -32,21 +32,15 @@ public class UsuarioRequestDTO {
     @Size(max = 11 , message = "O telefone deve ter minimo 11 caracteres")
     private String telefone;
 
-    @Valid
-    @NotNull(message = "A lista de endereços é obrigatória")
-    @Size(min = 1, message = "É necessário pelo menos um endereço")
-    private List<EnderecoRequestDTO> endereco;
-
     public UsuarioRequestDTO() {
     }
 
-    public UsuarioRequestDTO(String nome, String email, String senha, String cpf, String telefone, List<EnderecoRequestDTO> endereco) {
+    public UsuarioRequestDTO(String nome, String email, String senha, String cpf, String telefone) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.cpf = cpf;
         this.telefone = telefone;
-        this.endereco = endereco;
     }
 
     public @NotBlank(message = "O nome é obrigatorio") @Size(min = 3, max = 50, message = "O nome deve ter minimo de 3 caracteres") String getNome() {
@@ -65,11 +59,11 @@ public class UsuarioRequestDTO {
         this.email = email;
     }
 
-    public @NotBlank(message = "A senha é obrigatoria") @Size(min = 3, max = 10, message = "A senha deve ter minimo 10 caracteres") String getSenha() {
+    public @NotBlank(message = "A senha é obrigatoria") @Size(min = 3, max = 10, message = "A senha deve ter entre 3 e 10 caracteres.") String getSenha() {
         return senha;
     }
 
-    public void setSenha(@NotBlank(message = "A senha é obrigatoria") @Size(min = 3, max = 10, message = "A senha deve ter minimo 10 caracteres") String senha) {
+    public void setSenha(@NotBlank(message = "A senha é obrigatoria") @Size(min = 3, max = 10, message = "A senha deve ter entre 3 e 10 caracteres.") String senha) {
         this.senha = senha;
     }
 
@@ -87,13 +81,5 @@ public class UsuarioRequestDTO {
 
     public void setTelefone(@NotBlank(message = "O telefone é obrigatorio") @Size(max = 11, message = "O telefone deve ter minimo 11 caracteres") String telefone) {
         this.telefone = telefone;
-    }
-
-    public @Valid @NotNull(message = "A lista de endereços é obrigatória") @Size(min = 1, message = "É necessário pelo menos um endereço") List<EnderecoRequestDTO> getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(@Valid @NotNull(message = "A lista de endereços é obrigatória") @Size(min = 1, message = "É necessário pelo menos um endereço") List<EnderecoRequestDTO> endereco) {
-        this.endereco = endereco;
     }
 }
