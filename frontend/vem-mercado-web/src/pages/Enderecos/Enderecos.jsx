@@ -1,56 +1,85 @@
+// Arquivo: src/pages/Enderecos/Enderecos.jsx
+
 import React, { useEffect, useState } from "react";
-import { listarEnderecos, criarEndereco, atualizarEndereco, deletarEndereco } from "../../api/enderecoApi";
+import {
+  listarEnderecos,
+  criarEndereco,
+  atualizarEndereco,
+  deletarEndereco,
+} from "../../api/enderecoApi";
 import { useAuth } from "../../context/AuthContext";
 import Toast from "../../components/Toast";
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
+// Importamos o novo componente Modal
+import EnderecoFormModal from "../../components/EnderecoForm/EnderecoFormModal";
+import "./style.css";
+// Removendo useForm, yupResolver e yup, pois a lógica foi movida para o Modal
 
-const schema = yup.object({
-  logradouro: yup.string().min(5).required(),
-  numero: yup.string().max(10).required(),
-  cep: yup.string().min(8).required(),
-  estado: yup.string().min(3).required(),
-  bairro: yup.string().min(3).required(),
-  cidade: yup.string().min(5).required()
-});
-
-export default function Enderecos(){
+export default function Enderecos() {
   const { usuario } = useAuth();
   const [enderecos, setEnderecos] = useState([]);
   const [toast, setToast] = useState(null);
-  const [editing, setEditing] = useState(null);
-  const { register, handleSubmit, reset, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
 
+  // Novo estado para controlar a visibilidade do modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  // O estado 'editing' agora guarda os dados para pré-preencher o modal
+  const [editing, setEditing] = useState(null);
+
+  // Função de carregamento dos dados
   const load = () => {
     if (!usuario) return;
-    listarEnderecos(usuario.id).then(res => setEnderecos(res)).catch(err => setToast(err.response?.data?.mensagem || "Erro ao carregar"));
+    // Melhoria: Usar async/await aqui também para melhor legibilidade
+    listarEnderecos(usuario.id)
+      .then((res) => setEnderecos(res))
+      .catch((err) =>
+        setToast(err.response?.data?.mensagem || "Erro ao carregar"),
+      );
   };
 
-  useEffect(()=>{ load(); }, [usuario]);
+  useEffect(() => {
+    load();
+  }, [usuario]);
 
-  const onSubmit = async (data) => {
+  // Função unificada de submissão (Criação/Edição) - Passada para o Modal
+  const handleFormSubmit = async (data) => {
     try {
       if (editing) {
+        // Envia o ID para a atualização
         await atualizarEndereco(usuario.id, editing.id, data);
-        setToast("Endereço atualizado");
-        setEditing(null);
+        setToast("Endereço atualizado com sucesso");
       } else {
         await criarEndereco(usuario.id, data);
-        setToast("Endereço criado");
+        setToast("Endereço criado com sucesso");
       }
-      reset();
-      load();
+
+      // Fecha o modal e limpa o estado de edição após o sucesso
+      handleCloseModal();
+      load(); // Recarrega a lista
     } catch (err) {
-      setToast(err.response?.data?.mensagem || "Erro");
-    } finally { setTimeout(()=>setToast(null),3000); }
+      setToast(err.response?.data?.mensagem || "Erro na operação");
+    } finally {
+      setTimeout(() => setToast(null), 3000);
+    }
   };
 
+  // Função para abrir o modal para criação
+  const handleOpenCreate = () => {
+    setEditing(null); // Garantir que está no modo criação
+    setIsModalOpen(true);
+  };
+
+  // Função para abrir o modal para edição
   const startEdit = (e) => {
-    setEditing(e);
-    reset(e);
+    setEditing(e); // Define os dados para edição
+    setIsModalOpen(true); // Abre o modal
   };
 
+  // Função para fechar o modal
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setEditing(null); // Limpa o estado de edição ao fechar
+  };
+
+  // Função de remoção (mantida)
   const remove = async (id) => {
     try {
       await deletarEndereco(usuario.id, id);
@@ -58,46 +87,63 @@ export default function Enderecos(){
       load();
     } catch (err) {
       setToast(err.response?.data?.mensagem || "Erro ao deletar");
-    } finally { setTimeout(()=>setToast(null),3000); }
+    } finally {
+      setTimeout(() => setToast(null), 3000);
+    }
   };
 
   return (
-    <div>
-      <h2>Endereços</h2>
+    <div className="enderecos-page">
+      <h2>Endereços Cadastrados</h2>
+
+      {/* Botão para ABRIR o Modal de Cadastro */}
+      <button className="btn primary-action" onClick={handleOpenCreate}>
+        + Cadastrar Novo Endereço
+      </button>
+
+      {/* Lista de Endereços */}
       <div className="grid">
-        {enderecos.map(e => (
-          <div className="card" key={e.id}>
-            <div className="card-body">
-              <p>{e.logradouro}, {e.numero} - {e.bairro}</p>
-              <p>{e.cidade} - {e.estado} - CEP: {e.cep}</p>
-              <div className="card-footer">
-                <button className="btn ghost" onClick={() => startEdit(e)}>Editar</button>
-                <button className="btn ghost" onClick={() => remove(e.id)}>Remover</button>
+        {enderecos.length > 0 ? (
+          enderecos.map((e) => (
+            <div className="card" key={e.id}>
+              <div className="card-body">
+                <p>
+                  <strong>
+                    {e.logradouro}, {e.numero}
+                  </strong>{" "}
+                  - {e.bairro}
+                </p>
+                <p>
+                  {e.cidade} - {e.estado} - CEP: {e.cep}
+                </p>
+                <div className="card-footer">
+                  {/* Botão de edição abre o modal com os dados */}
+                  <button className="btn ghost" onClick={() => startEdit(e)}>
+                    Editar
+                  </button>
+                  <button className="btn danger" onClick={() => remove(e.id)}>
+                    Remover
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p className="no-data">
+            Nenhum endereço cadastrado. Clique em "Cadastrar Novo Endereço" para
+            começar.
+          </p>
+        )}
       </div>
 
-      <div className="card-form">
-        <h3>{editing ? "Editar endereço" : "Novo endereço"}</h3>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input placeholder="Logradouro" {...register("logradouro")} />
-          <p className="error">{errors.logradouro?.message}</p>
-          <input placeholder="Número" {...register("numero")} />
-          <p className="error">{errors.numero?.message}</p>
-          <input placeholder="CEP" {...register("cep")} />
-          <p className="error">{errors.cep?.message}</p>
-          <input placeholder="Estado" {...register("estado")} />
-          <p className="error">{errors.estado?.message}</p>
-          <input placeholder="Bairro" {...register("bairro")} />
-          <p className="error">{errors.bairro?.message}</p>
-          <input placeholder="Cidade" {...register("cidade")} />
-          <p className="error">{errors.cidade?.message}</p>
-          <button className="btn" type="submit">{editing ? "Salvar" : "Criar"}</button>
-          {editing && <button type="button" className="btn ghost" onClick={() => { setEditing(null); reset(); }}>Cancelar</button>}
-        </form>
-      </div>
+      {/* Componente Modal */}
+      <EnderecoFormModal
+        isOpen={isModalOpen}
+        editingData={editing}
+        onClose={handleCloseModal}
+        onSubmitForm={handleFormSubmit}
+      />
+
       <Toast message={toast} />
     </div>
   );

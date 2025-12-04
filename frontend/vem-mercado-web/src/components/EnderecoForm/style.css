@@ -1,0 +1,77 @@
+/* 1. Fundo Escuro (Backdrop) */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(
+        0,
+        0,
+        0,
+        0.6
+    ); /* Fundo escuro para destacar o modal */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050; /* Z-index alto para ficar acima de tudo */
+}
+
+/* 2. Conteúdo do Modal */
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    max-height: 95vh;
+    overflow-y: auto; /* Permite scroll se o formulário for muito longo */
+    /* Efeito de entrada sutil */
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: var(--primary-color);
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+/* 3. Estrutura do Formulário dentro do Modal */
+.modal-content .card-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 4. Ações (Botões) do Formulário */
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    justify-content: flex-end; /* Alinha botões à direita */
+}
+
+/* Botão Cancelar (usa .btn.ghost do shared.css) */
+
+/* Animação para entrada do Modal */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    .modal-content {
+        padding: 20px;
+    }
+    .form-actions {
+        flex-direction: column; /* Botões empilham em mobile */
+    }
+}
