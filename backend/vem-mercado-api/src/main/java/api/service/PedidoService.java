@@ -84,6 +84,11 @@ public class PedidoService {
         EnderecoModel endereco = enderecoRepository.findById(dto.getEnderecoEntregaId())
                 .orElseThrow(() -> new RuntimeException("Endereço de entrega não encontrado"));
 
+        // ✔ Verifica se o usuário possui pelo menos 1 endereço cadastrado
+        if (usuario.getEndereco() == null || usuario.getEndereco().isEmpty()) {
+            throw new RuntimeException("Você não possui um endereço cadastrado. Cadastre um endereço antes de continuar.");
+        }
+
         PedidoModel pedido = new PedidoModel();
         pedido.setUsuario(usuario);
         pedido.setEndereco(endereco);

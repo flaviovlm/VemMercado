@@ -55,39 +55,13 @@ public class UsuarioService {
         usuarioModel.setSenha(passwordEncoder.encode(dto.getSenha()));
         usuarioModel = usuarioRepository.save(usuarioModel);
 
-        List <EnderecoModel> listEndereco = new ArrayList<>();
-
-        if (dto.getEndereco() != null && !dto.getEndereco().isEmpty()){
-            for (EnderecoRequestDTO enderecoRequestDTO: dto.getEndereco()){
-                EnderecoModel modelEndereco =  new EnderecoModel();
-
-                modelEndereco.setLogradouro(enderecoRequestDTO.getLogradouro());
-                modelEndereco.setBairro(enderecoRequestDTO.getBairro());
-                modelEndereco.setCep(enderecoRequestDTO.getCep());
-                modelEndereco.setEstado(enderecoRequestDTO.getEstado());
-                modelEndereco.setNumero(enderecoRequestDTO.getNumero());
-                modelEndereco.setCidade(enderecoRequestDTO.getCidade());
-
-                modelEndereco.setUsuario(usuarioModel);
-                listEndereco.add(modelEndereco);
-            }
-
-            enderecoRepository.saveAll(listEndereco);
-        }
-
-        usuarioModel.setEndereco(listEndereco);
-
-
         return new UsuarioResponseDTO(
                 usuarioModel.getId(),
                 usuarioModel.getNome(),
                 usuarioModel.getEmail(),
                 usuarioModel.getCpf(),
                 usuarioModel.getTelefone(),
-                usuarioModel.getEndereco().stream()
-                        .map(enderecoModel -> new EnderecoResponseDTO(enderecoModel))
-                        .collect(Collectors.toList())
-
+                List.of()
         );
     }
 
