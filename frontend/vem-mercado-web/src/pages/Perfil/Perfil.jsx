@@ -1,52 +1,67 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { atualizarUsuarioParcial, buscarUsuarioPorCpf } from "../../api/usuarioApi";
+import {
+  atualizarUsuarioParcial,
+  buscarUsuarioPorCpf,
+} from "../../api/usuarioApi";
 import Toast from "../../components/Toast";
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
+// Importa o novo modal
+import PerfilFormModal from "../../components/PerfilForm/PerfilFormModal";
+import "./style.css";
+// Removemos useForm, yupResolver e yup daqui, pois a lógica de formulário está no modal.
 
-const schema = yup.object({
-  nome: yup.string().min(3).max(50),
-  email: yup.string().email(),
-  senha: yup.string().min(3).max(10),
-  telefone: yup.string().min(11)
-});
-
-export default function Perfil(){
+export default function Perfil() {
   const { usuario, login } = useAuth();
   const [toast, setToast] = useState(null);
-  const { register, handleSubmit, reset, formState: { errors } } =
-    useForm({ resolver: yupResolver(schema) });
+  const [perfilData, setPerfilData] = useState(null); // Estado para dados exibidos
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar o modal
+
+  // Função para carregar/recarregar os dados do usuário
+  const loadUserData = () => {
+    if (usuario) {
+      // Busca os dados mais recentes (útil após login/atualização)
+      buscarUsuarioPorCpf(usuario.cpf)
+        .then((res) => {
+          setPerfilData(res);
+        })
+        .catch((err) => {
+          setToast(
+            err.response?.data?.mensagem || "Erro ao carregar dados do perfil",
+          );
+        });
+    }
+  };
 
   useEffect(() => {
-    if (usuario) {
-      buscarUsuarioPorCpf(usuario.cpf).then(res => {
-        reset({
-          nome: res.nome,
-          email: res.email,
-          telefone: res.telefone
-        });
-      });
-    }
-  }, [usuario]);
+    loadUserData();
+  }, [usuario]); // Executa ao montar e sempre que o objeto 'usuario' mudar
 
-  const onSubmit = async (data) => {
+  // Função de submissão (será passada ao Modal)
+  const handleFormSubmit = async (data) => {
     try {
+      // 1. Filtra apenas campos preenchidos, removendo os vazios ou nulos (para atualização parcial/PATCH)
       const body = Object.fromEntries(
-        Object.entries(data).filter(([_, v]) => v !== "" && v !== null)
+        Object.entries(data).filter(
+          ([_, v]) => v !== "" && v !== null && v !== undefined,
+        ),
       );
 
+      // 2. Garante que pelo menos um campo foi alterado
       if (Object.keys(body).length === 0) {
         setToast("Nenhuma alteração realizada.");
         return;
       }
 
+      // 3. Envia a atualização
       await atualizarUsuarioParcial(usuario.id, body);
       setToast("Atualizado com sucesso!");
 
+      // 4. Recarrega os dados e atualiza o contexto de autenticação (boa prática)
       const updated = await buscarUsuarioPorCpf(usuario.cpf);
       login(updated);
+      setPerfilData(updated); // Atualiza o estado local para exibição
+
+      setIsModalOpen(false); // Fecha o modal
     } catch (err) {
       setToast(err.response?.data?.mensagem || "Erro ao atualizar");
     } finally {
@@ -54,24 +69,46 @@ export default function Perfil(){
     }
   };
 
+  if (!perfilData) {
+    return <div className="loading">Carregando perfil...</div>;
+  }
+
   return (
-    <div className="card-form">
-      <h2>Perfil</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input placeholder="Nome" {...register("nome")} />
-        <p className="error">{errors.nome?.message}</p>
+    <div className="perfil-container">
+      <h2>Meu Perfil</h2>
 
-        <input placeholder="Email" {...register("email")} />
-        <p className="error">{errors.email?.message}</p>
+      {/* Seção de VISUALIZAÇÃO dos dados */}
+      <div className="profile-card">
+        <p>
+          <strong>Nome:</strong> {perfilData.nome}
+        </p>
+        <p>
+          <strong>Email:</strong> {perfilData.email}
+        </p>
+        <p>
+          <strong>CPF:</strong> {perfilData.cpf}
+        </p>
+        <p>
+          <strong>Telefone:</strong> {perfilData.telefone}
+        </p>
 
-        <input placeholder="Senha" type="password" {...register("senha")} />
-        <p className="error">{errors.senha?.message}</p>
+        {/* Botão para abrir o modal de edição */}
+        <button
+          className="btn primary-action"
+          onClick={() => setIsModalOpen(true)}
+        >
+          Editar Informações
+        </button>
+      </div>
 
-        <input placeholder="Telefone" {...register("telefone")} />
-        <p className="error">{errors.telefone?.message}</p>
+      {/* Componente Modal */}
+      <PerfilFormModal
+        isOpen={isModalOpen}
+        initialData={perfilData} // Passa os dados atuais
+        onClose={() => setIsModalOpen(false)}
+        onSubmitForm={handleFormSubmit}
+      />
 
-        <button className="btn" type="submit">Salvar</button>
-      </form>
       <Toast message={toast} />
     </div>
   );

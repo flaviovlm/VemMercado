@@ -1,0 +1,46 @@
+/* Container da página de perfil */
+.perfil-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.perfil-container h2 {
+    margin-bottom: 30px;
+    font-size: 2em;
+    color: var(--text-color, #333);
+}
+
+/* Card de visualização dos dados */
+.profile-card {
+    background: var(--card-background, #ffffff);
+    padding: 30px;
+    border-radius: var(--border-radius, 6px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.profile-card p {
+    font-size: 1.1em;
+    margin: 10px 0;
+    padding: 5px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.profile-card p strong {
+    display: inline-block;
+    width: 120px; /* Alinha os valores */
+    font-weight: 600;
+    color: var(--primary-color, #007bff);
+}
+
+.profile-card .primary-action {
+    margin-top: 30px;
+    padding: 10px 20px;
+}
+
+.loading {
+    text-align: center;
+    padding: 50px;
+    font-size: 1.2em;
+    color: var(--secondary-color, #6c757d);
+}
