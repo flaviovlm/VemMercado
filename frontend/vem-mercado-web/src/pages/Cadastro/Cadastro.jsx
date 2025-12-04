@@ -1,5 +1,4 @@
 import React from "react";
-// Removendo useFieldArray
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -8,8 +7,6 @@ import { useNavigate } from "react-router-dom";
 import Toast from "../../components/Toast";
 import "./style.css";
 
-// 1. Esquema de Validação Atualizado
-// Removemos enderecoSchema e a validação do array 'endereco' do schema principal
 const schema = yup.object({
   // Validações mais expressivas para mensagens de erro claras
   nome: yup
@@ -25,7 +22,7 @@ const schema = yup.object({
   senha: yup
     .string()
     .min(6, "A senha deve ter no mínimo 6 caracteres")
-    .max(20, "A senha deve ter no máximo 20 caracteres")
+    .max(10, "A senha deve ter no máximo 20 caracteres")
     .required("Senha é obrigatória"),
   // Validação focada em 11 dígitos para CPF (apenas números)
   cpf: yup
@@ -40,29 +37,23 @@ const schema = yup.object({
 });
 
 export default function Cadastro() {
-  // 2. Lógica do Componente Atualizada
-  // Não precisamos mais de 'control'
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(schema),
-    // Removendo defaultValues para 'endereco'
   });
-  // Remoção de useFieldArray (fields, append, remove)
 
   const [toast, setToast] = React.useState(null);
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
-      // ⚠️ ASSUMIMOS que a API de cadastro agora aceita o payload sem o array de 'endereco'
       await cadastrarUsuario(data);
       setToast("Cadastro realizado com sucesso");
       setTimeout(() => navigate("/login"), 1000);
     } catch (err) {
-      // Melhoria no tratamento de erro para exibir mensagens mais específicas da API
       setToast(
         err.response?.data?.mensagem || "Erro no cadastro. Verifique os dados.",
       );
@@ -85,7 +76,6 @@ export default function Cadastro() {
         <input placeholder="Senha" type="password" {...register("senha")} />
         <p className="error">{errors.senha?.message}</p>
 
-        {/* ⚠️ Melhoria de UX: Adicionar formatação de máscara (ex: react-input-mask) para campos como CPF/Telefone em um cenário real. */}
         <input placeholder="CPF (somente números)" {...register("cpf")} />
         <p className="error">{errors.cpf?.message}</p>
 
@@ -94,8 +84,6 @@ export default function Cadastro() {
           {...register("telefone")}
         />
         <p className="error">{errors.telefone?.message}</p>
-
-        {/* 3. Remoção da seção de Endereços no JSX */}
 
         <button className="btn" type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Cadastrando..." : "Cadastrar"}
