@@ -1,0 +1,254 @@
+/* NAVBAR APPLE STYLE - Outro Nível */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --nav-bg: rgba(255, 255, 255, 0.72);
+  --nav-text: #1d1d1f;
+  --nav-hover: #34c759;
+  --nav-shadow: rgba(0, 0, 0, 0.04);
+}
+
+/* Header Principal */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background: var(--nav-bg);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+/* Efeito de scroll */
+.nav.scrolled {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Logo/Brand */
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--nav-text);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  transition: all 0.2s ease;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.brand:hover {
+  color: var(--nav-hover);
+  background-color: rgba(52, 199, 89, 0.08);
+  transform: scale(1.02);
+}
+
+/* Navegação Direita */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-right a {
+  position: relative;
+  padding: 8px 14px;
+  margin: 0 2px;
+  color: var(--nav-text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.nav-right a::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 70%;
+  height: 2px;
+  background-color: var(--nav-hover);
+  border-radius: 2px;
+  transition: transform 0.2s ease;
+}
+
+.nav-right a:hover {
+  color: var(--nav-hover);
+  background-color: rgba(52, 199, 89, 0.08);
+}
+
+.nav-right a:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* Badge do Carrinho */
+.nav-right a[href="/carrinho"] {
+  position: relative;
+  font-weight: 600;
+}
+
+/* Botão Sair */
+.nav-right .btn.ghost {
+  background: transparent;
+  color: var(--nav-text);
+  padding: 8px 16px;
+  margin-left: 8px;
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.nav-right .btn.ghost:hover {
+  background-color: #ff3b30;
+  color: white;
+  border-color: #ff3b30;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 59, 48, 0.3);
+}
+
+.nav-right .btn.ghost:active {
+  transform: scale(0.98);
+}
+
+/* Menu Mobile (Hamburger) */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.mobile-menu-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.mobile-menu-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: var(--nav-text);
+  margin: 5px 0;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+/* Responsividade */
+@media (max-width: 968px) {
+  .nav {
+    padding: 12px 20px;
+  }
+
+  .nav-right {
+    gap: 2px;
+  }
+
+  .nav-right a {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
+
+  .brand {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  .nav-right {
+    position: fixed;
+    top: 60px;
+    right: -100%;
+    width: 280px;
+    height: calc(100vh - 60px);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 20px;
+    box-shadow: -2px 0 20px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    overflow-y: auto;
+  }
+
+  .nav-right.active {
+    right: 0;
+  }
+
+  .nav-right a {
+    padding: 14px 16px;
+    margin: 4px 0;
+    border-radius: 10px;
+    font-size: 1rem;
+  }
+
+  .nav-right a::after {
+    display: none;
+  }
+
+  .nav-right .btn.ghost {
+    margin: 12px 0 0 0;
+    padding: 12px;
+    border-radius: 10px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav {
+    padding: 10px 16px;
+  }
+
+  .brand {
+    font-size: 1.1rem;
+  }
+}
+
+/* Animação de entrada */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.nav-right a {
+  animation: slideInRight 0.3s ease backwards;
+}
+
+.nav-right a:nth-child(1) { animation-delay: 0.05s; }
+.nav-right a:nth-child(2) { animation-delay: 0.1s; }
+.nav-right a:nth-child(3) { animation-delay: 0.15s; }
+.nav-right a:nth-child(4) { animation-delay: 0.2s; }
+.nav-right a:nth-child(5) { animation-delay: 0.25s; }
+.nav-right .btn { animation-delay: 0.3s; }

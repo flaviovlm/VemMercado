@@ -1,77 +1,194 @@
-/* 1. Fundo Escuro (Backdrop) */
-.modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(
-        0,
-        0,
-        0,
-        0.6
-    ); /* Fundo escuro para destacar o modal */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1050; /* Z-index alto para ficar acima de tudo */
+/* ARQUIVO: style.css (Para EnderecoFormModal.jsx) */
+/* Importando a fonte Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --apple-green: #34c759;
+  --apple-green-hover: #248a3d;
+  --apple-red: #ff3b30;
+  --apple-red-hover: #d32f2f;
+  --bg-color: #f5f5f7;
+  --card-bg: #ffffff;
+  --text-primary: #1d1d1f;
+  --text-secondary: #86868b;
+  --divider: #e5e5ea;
+  --input-border: #d2d2d7;
+  --input-focus: #34c759;
+  --error-color: #ff3b30;
 }
 
-/* 2. Conteúdo do Modal */
+/* Modal Backdrop */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal Content */
 .modal-content {
-    background-color: white;
-    padding: 30px;
-    border-radius: 24px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    max-width: 500px;
-    max-height: 95vh;
-    overflow-y: auto; /* Permite scroll se o formulário for muito longo */
-    /* Efeito de entrada sutil */
-    animation: fadeIn 0.3s ease-out;
+  background-color: var(--card-bg);
+  width: 90%;
+  max-width: 500px;
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .modal-content h3 {
-    margin-top: 0;
-    margin-bottom: 25px;
-    color: var(--primary-color);
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 10px;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+  margin: 0 0 30px 0;
+  text-align: center;
 }
 
-/* 3. Estrutura do Formulário dentro do Modal */
-.modal-content .card-form {
-    display: flex;
-    flex-direction: column;
+/* Formulário */
+.card-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-/* 4. Ações (Botões) do Formulário */
+.card-form input {
+  width: 100%;
+  padding: 16px 18px;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+  background-color: var(--bg-color);
+  border: 2px solid var(--input-border);
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.card-form input::placeholder {
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.card-form input:focus {
+  border-color: var(--input-focus);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(52, 199, 89, 0.1);
+}
+
+.card-form input:hover:not(:focus) {
+  border-color: #b8b8bd;
+}
+
+/* Mensagens de Erro */
+.error {
+  color: var(--error-color);
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin: 4px 0 8px 4px;
+  min-height: 20px;
+  display: block;
+}
+
+/* Botões */
 .form-actions {
-    display: flex;
-    gap: 15px;
-    margin-top: 25px;
-    justify-content: flex-end; /* Alinha botões à direita */
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
 }
 
-/* Botão Cancelar (usa .btn.ghost do shared.css) */
-
-/* Animação para entrada do Modal */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.btn-primary {
+  flex: 1;
+  background-color: #34c759;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.1s;
+  font-family: 'Inter', sans-serif;
 }
 
-@media (max-width: 600px) {
-    .modal-content {
-        padding: 20px;
-    }
-    .form-actions {
-        flex-direction: column; /* Botões empilham em mobile */
-    }
+.btn-primary:hover {
+  opacity: 0.9;
 }
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  flex: 1;
+  background-color: #e5e5ea;
+  color: #1d1d1f;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-secondary:hover {
+  background-color: #d1d1d6;
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+/* Scrollbar customizada para o modal */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: var(--input-border);
+  border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+

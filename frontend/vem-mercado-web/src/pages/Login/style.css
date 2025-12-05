@@ -133,21 +133,22 @@ body {
 }
 
 /* Link adicional (ex: "Já tem conta? Faça login") */
-.card-form .link-text {
+.card-form > p {
   margin-top: 24px;
   text-align: center;
   color: var(--text-secondary);
   font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
 }
 
-.card-form .link-text a {
+.card-form > p a {
   color: var(--apple-green);
   font-weight: 600;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.card-form .link-text a:hover {
+.card-form > p a:hover {
   color: var(--apple-green-hover);
   text-decoration: underline;
 }

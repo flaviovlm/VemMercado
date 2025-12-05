@@ -97,33 +97,4 @@
   font-weight: 500;
 }
 
-/* --- RESPONSIVIDADE PARA CELULAR (Adicione no final do arquivo) --- */
-@media (max-width: 600px) {
-  .perfil-container {
-    padding-top: 30px; /* Menos espaço no topo */
-    padding-left: 15px;
-    padding-right: 15px;
-  }
 
-  .perfil-container h2 {
-    font-size: 1.8rem; /* Título um pouco menor */
-    margin-bottom: 20px;
-  }
-
-  .profile-card {
-    padding: 25px; /* Reduz o "balão" branco para caber mais texto */
-    border-radius: 20px;
-  }
-
-  .profile-card p {
-    flex-direction: column; /* Em vez de lado-a-lado, coloca um embaixo do outro */
-    align-items: flex-start; /* Alinha tudo à esquerda */
-    gap: 5px; /* Espacinho entre o rótulo e o valor */
-  }
-
-  .profile-card p strong {
-    font-size: 0.85rem; /* Rótulo menor */
-    text-transform: uppercase; /* Estilo Apple Mobile: rótulos em caixa alta */
-    letter-spacing: 0.05em;
-  }
-}

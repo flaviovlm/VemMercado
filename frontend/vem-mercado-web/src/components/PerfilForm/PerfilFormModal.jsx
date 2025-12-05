@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import "./style.css"; // Certifique-se de ter seus estilos aqui
+import "./style.css";
 
 // Schema de validação
 const schema = yup.object({
@@ -88,23 +88,21 @@ export default function PerfilFormModal({ isOpen, initialData, onClose, onSubmit
           {/* --- DADOS BÁSICOS --- */}
           <div className="form-group">
             <label>Nome</label>
-            <input {...register("nome")} placeholder="Seu nome" />
+            <input type="text" {...register("nome")} placeholder="Seu nome" />
             <p className="error">{errors.nome?.message}</p>
           </div>
 
           <div className="form-group">
             <label>E-mail</label>
-            <input {...register("email")} placeholder="seu@email.com" />
+            <input type="email" {...register("email")} placeholder="seu@email.com" />
             <p className="error">{errors.email?.message}</p>
           </div>
 
           <div className="form-group">
             <label>Telefone</label>
-            <input {...register("telefone")} placeholder="DD999999999" />
+            <input type="text" {...register("telefone")} placeholder="DD999999999" />
             <p className="error">{errors.telefone?.message}</p>
           </div>
-
-          <hr />
 
           {/* --- BOTÃO PARA QUEM QUER TROCAR SENHA --- */}
           {!editandoSenha && (
@@ -112,7 +110,6 @@ export default function PerfilFormModal({ isOpen, initialData, onClose, onSubmit
               type="button" 
               className="btn-text" 
               onClick={toggleEditSenha}
-              style={{ textDecoration: "underline", color: "#007bff", background: "none", border: "none", cursor: "pointer", padding: "10px 0" }}
             >
               Quero alterar minha senha
             </button>
@@ -120,11 +117,23 @@ export default function PerfilFormModal({ isOpen, initialData, onClose, onSubmit
 
           {/* --- CAMPO DE NOVA SENHA (SÓ APARECE SE CLICOU NO BOTÃO) --- */}
           {editandoSenha && (
-            <div className="nova-senha-area" style={{ background: "#f8f9fa", padding: "10px", borderRadius: "5px", marginBottom: "15px" }}>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <label>Nova Senha</label>
-                <button type="button" onClick={toggleEditSenha} style={{ fontSize: "0.8rem", color: "red", background: "none", border: "none", cursor: "pointer" }}>
-                  Cancelar troca
+            <div className="nova-senha-area">
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
+                <label style={{ color: "var(--text-primary)", fontWeight: 600 }}>Nova Senha</label>
+                <button 
+                  type="button" 
+                  onClick={toggleEditSenha}
+                  style={{ 
+                    fontSize: "0.85rem", 
+                    color: "var(--error-color)", 
+                    background: "none", 
+                    border: "none", 
+                    cursor: "pointer",
+                    fontWeight: 600,
+                    fontFamily: "'Inter', sans-serif"
+                  }}
+                >
+                  Cancelar
                 </button>
               </div>
               <input 
@@ -139,11 +148,9 @@ export default function PerfilFormModal({ isOpen, initialData, onClose, onSubmit
           {/* --- CAMPO DE SENHA ATUAL (AUTOMÁTICO) --- */}
           {/* Aparece sozinho se mudou email/telefone OU se abriu a troca de senha */}
           {devePedirSenhaAtual && (
-            <div className="senha-atual-area" style={{ border: "1px solid #ffc107", padding: "10px", borderRadius: "5px", backgroundColor: "#fff3cd", marginTop: "10px" }}>
-              <label style={{ fontWeight: "bold", color: "#856404" }}>
-                Confirme sua Senha Atual
-              </label>
-              <small style={{ display: "block", marginBottom: "5px", color: "#856404" }}>
+            <div className="senha-atual-area">
+              <label>Confirme sua Senha Atual</label>
+              <small style={{ display: "block", marginBottom: "10px", color: "#b38600", fontSize: "0.85rem" }}>
                 Necessário para salvar alterações sensíveis (Email, Telefone ou Senha).
               </small>
               <input
@@ -155,7 +162,7 @@ export default function PerfilFormModal({ isOpen, initialData, onClose, onSubmit
             </div>
           )}
 
-          <div className="modal-actions" style={{ marginTop: "20px", display: "flex", gap: "10px", justifyContent: "flex-end" }}>
+          <div className="modal-actions">
             <button type="button" className="btn-secondary" onClick={onClose}>
               Cancelar
             </button>

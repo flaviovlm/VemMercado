@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { listarPedidosDoUsuario, buscarPedidoPorId } from "../../api/pedidoApi";
 import { useAuth } from "../../context/AuthContext";
 import Toast from "../../components/Toast";
+import "./style.css";
 
 export default function Pedidos(){
   const { usuario } = useAuth();

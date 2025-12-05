@@ -95,7 +95,7 @@ export default function Enderecos() {
 
   return (
     <div className="enderecos-page">
-      <h2>Endereços Cadastrados</h2>
+      <h2>Endereços</h2>
 
       <button className="btn primary-action" onClick={handleOpenCreate}>
         + Cadastrar Novo Endereço

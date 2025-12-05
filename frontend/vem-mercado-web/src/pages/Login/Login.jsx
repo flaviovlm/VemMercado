@@ -6,6 +6,7 @@ import { loginUsuario } from "../../api/usuarioApi";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import Toast from "../../components/Toast";
+import "./style.css";
 
 const schema = yup.object({
   email: yup.string().email("Email inválido").required("Email obrigatório"),

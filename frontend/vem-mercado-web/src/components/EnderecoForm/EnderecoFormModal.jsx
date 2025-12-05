@@ -21,7 +21,7 @@ const schema = yup.object({
     .string()
     .min(3, "Mínimo 3 caracteres")
     .max(40, "Máximo 40 caracteres")
-    .required("Obrigatório"), // Ajustando validação para 2 caracteres (UF)
+    .required("Obrigatório"),
   bairro: yup.string().min(3, "Mínimo 3 caracteres").required("Obrigatório"),
   cidade: yup.string().min(5, "Mínimo 5 caracteres").required("Obrigatório"),
 });
@@ -76,7 +76,6 @@ export default function EnderecoFormModal({
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h3>{editingData ? "Editar Endereço" : "Novo Endereço"}</h3>
-
         <form onSubmit={handleSubmit(onSubmitForm)} className="card-form">
           {/* Inputs do Endereço */}
           <input placeholder="Logradouro" {...register("logradouro")} />
@@ -98,10 +97,10 @@ export default function EnderecoFormModal({
           <p className="error">{errors.cidade?.message}</p>
 
           <div className="form-actions">
-            <button className="btn" type="submit">
-              {editingData ? "Salvar" : "Criar"}
+            <button className="btn-primary" type="submit">
+              {editingData ? "Salvar Alterações" : "Criar Endereço"}
             </button>
-            <button type="button" className="btn ghost" onClick={onClose}>
+            <button type="button" className="btn-secondary" onClick={onClose}>
               Cancelar
             </button>
           </div>
