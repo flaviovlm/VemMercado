@@ -1,5 +1,4 @@
-// src/pages/Enderecos/Enderecos.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   listarEnderecos,
   criarEndereco,
@@ -12,28 +11,37 @@ import EnderecoFormModal from "../../components/EnderecoForm/EnderecoFormModal";
 import "./style.css";
 
 export default function Enderecos() {
-  const { usuario } = useAuth();
+  const { usuario, updateUserAddresses } = useAuth();
   const [enderecos, setEnderecos] = useState([]);
   const [toast, setToast] = useState(null);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editing, setEditing] = useState(null);
 
-  // Carregar endereços
-  const load = async () => {
-    if (!usuario) return;
+  // Usamos useCallback para memoizar a função load, para que ela não mude a cada renderização
+  // e cause a re-execução do useEffect desnecessariamente.
+  const load = useCallback(async () => {
+    if (!usuario) {
+      setEnderecos([]); // Limpa endereços se não houver usuário
+      updateUserAddresses([]); // Limpa endereços no contexto também
+      return;
+    }
     try {
       const res = await listarEnderecos(usuario.id);
       setEnderecos(res);
+      updateUserAddresses(res); // Atualiza o contexto global do usuário com os novos endereços
     } catch (err) {
       setToast(err.mensagem || "Erro ao carregar endereços");
       setTimeout(() => setToast(null), 3000);
     }
-  };
+  }, [usuario, updateUserAddresses]); // Adicione usuario e updateUserAddresses como dependências
 
+  // O useEffect agora depende apenas de usuario?.id e da função load (que é memoizada).
+  // Isso garante que ele só seja disparado quando o ID do usuário realmente mudar ou
+  // quando a função load for alterada (o que só acontecerá se suas dependências mudarem).
   useEffect(() => {
     load();
-  }, [usuario]);
+  }, [usuario?.id]);
 
   // Criar ou editar endereço
   const handleFormSubmit = async (data) => {
@@ -47,7 +55,7 @@ export default function Enderecos() {
       }
 
       handleCloseModal();
-      load(); // Atualiza lista
+      await load(); // Garante que a lista de endereços foi atualizada no estado local e no contexto
     } catch (err) {
       setToast(err.mensagem || "Erro ao salvar endereço");
     } finally {
@@ -77,7 +85,7 @@ export default function Enderecos() {
     try {
       await deletarEndereco(usuario.id, id);
       setToast("Endereço removido com sucesso");
-      load();
+      await load(); // Garante que a lista de endereços foi atualizada no estado local e no contexto
     } catch (err) {
       setToast(err.mensagem || "Erro ao remover endereço");
     } finally {
