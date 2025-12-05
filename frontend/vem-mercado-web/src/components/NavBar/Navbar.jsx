@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
 import "./style.css";
+import logo from "../../assets/logo.svg"
 
 export default function Navbar(){
   const { usuario, logout } = useAuth();
@@ -17,7 +18,9 @@ export default function Navbar(){
   return (
     <header className="nav">
       <div className="nav-left">
-        <Link to="/produtos" className="brand">VemMercado</Link>
+      <Link to="/produtos" className="brand">
+        <img src={logo} alt="VemMercado" className="logo-img" />
+      </Link>
       </div>
       <nav className="nav-right">
         {usuario ? (

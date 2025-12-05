@@ -1,4 +1,4 @@
-/* NAVBAR APPLE STYLE - Outro Nível */
+/* NAVBAR APPLE STYLE COMPLETO - Com Logo */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
@@ -33,27 +33,36 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* Logo/Brand */
+/* Logo/Brand Container */
 .nav-left {
   display: flex;
   align-items: center;
 }
 
 .brand {
-  font-weight: 700;
-  font-size: 1.35rem;
-  color: var(--nav-text);
-  text-decoration: none;
-  letter-spacing: -0.02em;
-  transition: all 0.2s ease;
-  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
   border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
 }
 
 .brand:hover {
-  color: var(--nav-hover);
   background-color: rgba(52, 199, 89, 0.08);
   transform: scale(1.02);
+}
+
+/* Logo Image */
+.logo-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.brand:hover .logo-img {
+  transform: scale(1.05);
 }
 
 /* Navegação Direita */
@@ -155,6 +164,29 @@
   border-radius: 2px;
 }
 
+/* Animação de entrada dos links */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.nav-right a {
+  animation: slideInRight 0.3s ease backwards;
+}
+
+.nav-right a:nth-child(1) { animation-delay: 0.05s; }
+.nav-right a:nth-child(2) { animation-delay: 0.1s; }
+.nav-right a:nth-child(3) { animation-delay: 0.15s; }
+.nav-right a:nth-child(4) { animation-delay: 0.2s; }
+.nav-right a:nth-child(5) { animation-delay: 0.25s; }
+.nav-right .btn { animation-delay: 0.3s; }
+
 /* Responsividade */
 @media (max-width: 968px) {
   .nav {
@@ -170,8 +202,8 @@
     font-size: 0.9rem;
   }
 
-  .brand {
-    font-size: 1.2rem;
+  .logo-img {
+    height: 36px;
   }
 }
 
@@ -206,6 +238,7 @@
     margin: 4px 0;
     border-radius: 10px;
     font-size: 1rem;
+    animation: none;
   }
 
   .nav-right a::after {
@@ -225,30 +258,11 @@
     padding: 10px 16px;
   }
 
+  .logo-img {
+    height: 32px;
+  }
+
   .brand {
-    font-size: 1.1rem;
+    padding: 4px 6px;
   }
 }
-
-/* Animação de entrada */
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.nav-right a {
-  animation: slideInRight 0.3s ease backwards;
-}
-
-.nav-right a:nth-child(1) { animation-delay: 0.05s; }
-.nav-right a:nth-child(2) { animation-delay: 0.1s; }
-.nav-right a:nth-child(3) { animation-delay: 0.15s; }
-.nav-right a:nth-child(4) { animation-delay: 0.2s; }
-.nav-right a:nth-child(5) { animation-delay: 0.25s; }
-.nav-right .btn { animation-delay: 0.3s; }
