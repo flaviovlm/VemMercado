@@ -5,10 +5,9 @@ import {
   buscarUsuarioPorCpf,
 } from "../../api/usuarioApi";
 import Toast from "../../components/Toast";
-// Importa o novo modal
+// Importa o novo modal (certifique-se que o caminho está correto)
 import PerfilFormModal from "../../components/PerfilForm/PerfilFormModal";
 import "./style.css";
-// Removemos useForm, yupResolver e yup daqui, pois a lógica de formulário está no modal.
 
 export default function Perfil() {
   const { usuario, login } = useAuth();
@@ -36,33 +35,44 @@ export default function Perfil() {
     loadUserData();
   }, [usuario]); // Executa ao montar e sempre que o objeto 'usuario' mudar
 
-  // Função de submissão (será passada ao Modal)
+  // Função de submissão OTIMIZADA
   const handleFormSubmit = async (data) => {
     try {
-      // 1. Filtra apenas campos preenchidos, removendo os vazios ou nulos (para atualização parcial/PATCH)
-      const body = Object.fromEntries(
-        Object.entries(data).filter(
-          ([_, v]) => v !== "" && v !== null && v !== undefined,
-        ),
-      );
+      // Objeto que conterá apenas o que realmente mudou
+      const dirtyFields = {};
 
-      // 2. Garante que pelo menos um campo foi alterado
-      if (Object.keys(body).length === 0) {
+      // Compara os valores do formulário (data) com os originais (perfilData)
+      if (data.nome !== perfilData.nome) dirtyFields.nome = data.nome;
+      if (data.email !== perfilData.email) dirtyFields.email = data.email;
+      if (data.telefone !== perfilData.telefone) dirtyFields.telefone = data.telefone;
+
+      // Senha e Senha Atual sempre entram se foram preenchidas (não nulas/vazias)
+      // O formulário já garante que 'senha' e 'senhaAtual' vêm como string ou null/undefined
+      if (data.senha) dirtyFields.senha = data.senha;
+      if (data.senhaAtual) dirtyFields.senhaAtual = data.senhaAtual;
+
+      // Se o objeto estiver vazio, significa que o usuário clicou em salvar sem mudar nada
+      if (Object.keys(dirtyFields).length === 0) {
         setToast("Nenhuma alteração realizada.");
+        setIsModalOpen(false); // Pode fechar o modal se quiser
         return;
       }
 
-      // 3. Envia a atualização
-      await atualizarUsuarioParcial(usuario.id, body);
+      // Envia a atualização apenas com os campos 'sujos' (alterados)
+      await atualizarUsuarioParcial(usuario.id, dirtyFields);
       setToast("Atualizado com sucesso!");
 
-      // 4. Recarrega os dados e atualiza o contexto de autenticação (boa prática)
-      const updated = await buscarUsuarioPorCpf(usuario.cpf);
-      login(updated);
-      setPerfilData(updated); // Atualiza o estado local para exibição
-
+      // Recarrega os dados e atualiza o contexto de autenticação
+      // Nota: Como o CPF pode ter mudado (teoricamente), usamos o ID ou buscamos de novo
+      // Se sua API permite mudar CPF, cuidado aqui. Se não, segue a busca pelo CPF atual.
+      const updated = await buscarUsuarioPorCpf(perfilData.cpf); 
+      
+      login(updated); // Atualiza o contexto global
+      setPerfilData(updated); // Atualiza o estado local
       setIsModalOpen(false); // Fecha o modal
+
     } catch (err) {
+      console.error(err);
       setToast(err.response?.data?.mensagem || "Erro ao atualizar");
     } finally {
       setTimeout(() => setToast(null), 3000);

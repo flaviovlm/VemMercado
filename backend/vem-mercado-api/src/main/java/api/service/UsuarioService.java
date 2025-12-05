@@ -25,6 +25,15 @@ import java.util.stream.Collectors;
 @Service
 public class UsuarioService {
 
+    private void validarSenha(UsuarioPatchDTO patchDTO, UsuarioModel usuarioModel){
+        if (patchDTO.getSenhaAtual() == null){
+            throw new RuntimeException("Para esta alteração, é necessário confirmar a senha!");
+        }
+        if (!passwordEncoder.matches(patchDTO.getSenhaAtual(), usuarioModel.getSenha())){
+            throw new RuntimeException("Senha inválida!");
+        }
+    }
+
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -111,7 +120,9 @@ public class UsuarioService {
             usuario.setNome(patchDTO.getNome());
         }
 
-        if (patchDTO.getEmail() != null) {
+        if (patchDTO.getEmail() != null && !patchDTO.getEmail().equals(usuario.getEmail())) {
+            validarSenha(patchDTO, usuario);
+
             usuarioRepository.findByEmail(patchDTO.getEmail()).ifPresent(u -> {
                 if (!u.getId().equals(id)) {
                     throw new RuntimeException("Este e-mail já está em uso");
@@ -121,7 +132,10 @@ public class UsuarioService {
             usuario.setEmail(patchDTO.getEmail());
         }
 
-        if (patchDTO.getTelefone() != null) {
+        if (patchDTO.getTelefone() != null && !patchDTO.getTelefone().equals(usuario.getTelefone())) {
+
+            validarSenha(patchDTO, usuario);
+
             usuarioRepository.findByTelefone(patchDTO.getTelefone()).ifPresent(u -> {
                 if (!u.getId().equals(id)) {
                     throw new RuntimeException("Este telefone já está em uso");
@@ -132,6 +146,8 @@ public class UsuarioService {
         }
 
         if (patchDTO.getSenha() != null) {
+
+            validarSenha(patchDTO, usuario);
             usuario.setSenha(passwordEncoder.encode(patchDTO.getSenha()));
         }
 

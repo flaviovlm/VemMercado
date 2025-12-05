@@ -6,16 +6,8 @@ public class UsuarioPatchDTO {
     private String email;
     private String telefone;
     private String senha;
+    private String senhaAtual;
 
-    public UsuarioPatchDTO(String nome, String email, String telefone, String senha) {
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-        this.senha = senha;
-    }
-
-    public UsuarioPatchDTO() {
-    }
 
     public String getNome() {
         return nome;
@@ -47,5 +39,13 @@ public class UsuarioPatchDTO {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getSenhaAtual() {
+        return senhaAtual;
+    }
+
+    public void setSenhaAtual(String senhaAtual) {
+        this.senhaAtual = senhaAtual;
     }
 }
