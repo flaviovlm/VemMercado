@@ -74,7 +74,7 @@ export default function PerfilFormModal({
           <input placeholder="Email" {...register("email")} />
           <p className="error">{errors.email?.message}</p>
 
-          <label>Nova Senha (deixe em branco para não alterar)</label>
+          <label>Confirme a sua senha</label>
           {/* Campo de Senha: Vazio por padrão e opcional */}
           <input placeholder="Senha" type="password" {...register("senha")} />
           <p className="error">{errors.senha?.message}</p>

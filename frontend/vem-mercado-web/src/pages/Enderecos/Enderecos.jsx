@@ -12,7 +12,7 @@ import EnderecoFormModal from "../../components/EnderecoForm/EnderecoFormModal";
 import "./style.css";
 
 export default function Enderecos() {
-  const { usuario } = useAuth();
+  const { usuario, updateUsuario } = useAuth();
   const [enderecos, setEnderecos] = useState([]);
   const [toast, setToast] = useState(null);
 
@@ -25,6 +25,19 @@ export default function Enderecos() {
     try {
       const res = await listarEnderecos(usuario.id);
       setEnderecos(res);
+      // Atualiza o usuário no contexto somente quando os endereços
+      // realmente mudaram — evita re-render/loop infinito.
+      if (updateUsuario && usuario) {
+        try {
+          const prev = usuario.enderecos || [];
+          const same = JSON.stringify(prev) === JSON.stringify(res);
+          if (!same) {
+            updateUsuario({ ...usuario, enderecos: res });
+          }
+        } catch (e) {
+          console.warn("Falha ao atualizar usuário no contexto:", e);
+        }
+      }
     } catch (err) {
       setToast(err.mensagem || "Erro ao carregar endereços");
       setTimeout(() => setToast(null), 3000);
@@ -33,7 +46,7 @@ export default function Enderecos() {
 
   useEffect(() => {
     load();
-  }, [usuario]);
+  }, [usuario?.id]);
 
   // Criar ou editar endereço
   const handleFormSubmit = async (data) => {

@@ -1,0 +1,107 @@
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldBase has been called by com.google.inject.internal.aop.HiddenClassDefiner (file:/Users/nicolas/.m2/wrapper/dists/apache-maven-3.9.11/a2d47e15/lib/guice-5.1.0-classes.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.inject.internal.aop.HiddenClassDefiner
+WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< com.example:vem-mercado-api >---------------------
+[INFO] Building vem-mercado-api 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.5.8:run (default-cli) > test-compile @ vem-mercado-api >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ vem-mercado-api ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ vem-mercado-api ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ vem-mercado-api ---
+[INFO] skip non existing resourceDirectory /Users/nicolas/Documents/VemMercado/backend/vem-mercado-api/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ vem-mercado-api ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< spring-boot:3.5.8:run (default-cli) < test-compile @ vem-mercado-api <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.5.8:run (default-cli) @ vem-mercado-api ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.8)
+
+2025-12-04T21:20:40.405-03:00  INFO 58243 --- [  restartedMain] api.VemMercadoApiApplication             : Starting VemMercadoApiApplication using Java 25.0.1 with PID 58243 (/Users/nicolas/Documents/VemMercado/backend/vem-mercado-api/target/classes started by nicolas in /Users/nicolas/Documents/VemMercado/backend/vem-mercado-api)
+2025-12-04T21:20:40.405-03:00  INFO 58243 --- [  restartedMain] api.VemMercadoApiApplication             : No active profile set, falling back to 1 default profile: "default"
+2025-12-04T21:20:40.421-03:00  INFO 58243 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-12-04T21:20:40.421-03:00  INFO 58243 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-12-04T21:20:40.644-03:00  INFO 58243 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-04T21:20:40.668-03:00  INFO 58243 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 5 JPA repository interfaces.
+2025-12-04T21:20:40.881-03:00  INFO 58243 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-12-04T21:20:40.887-03:00  INFO 58243 --- [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-04T21:20:40.887-03:00  INFO 58243 --- [  restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.49]
+2025-12-04T21:20:40.899-03:00  INFO 58243 --- [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-12-04T21:20:40.899-03:00  INFO 58243 --- [  restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 478 ms
+2025-12-04T21:20:40.956-03:00  INFO 58243 --- [  restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-04T21:20:40.971-03:00  INFO 58243 --- [  restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.36.Final
+2025-12-04T21:20:40.980-03:00  INFO 58243 --- [  restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-12-04T21:20:41.073-03:00  INFO 58243 --- [  restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-04T21:20:41.083-03:00  INFO 58243 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-12-04T21:20:42.125-03:00  INFO 58243 --- [  restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6ab9a6b7
+2025-12-04T21:20:42.127-03:00  INFO 58243 --- [  restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-12-04T21:20:42.250-03:00  WARN 58243 --- [  restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-04T21:20:42.505-03:00  INFO 58243 --- [  restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.6
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-04T21:20:42.847-03:00  INFO 58243 --- [  restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-04T21:20:44.510-03:00  INFO 58243 --- [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-04T21:20:44.658-03:00  WARN 58243 --- [  restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-04T21:20:44.669-03:00  WARN 58243 --- [  restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: a09f4b20-388d-4707-96d7-ebb28537aa4d
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-04T21:20:44.672-03:00  INFO 58243 --- [  restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-12-04T21:20:44.833-03:00  INFO 58243 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-12-04T21:20:44.844-03:00  INFO 58243 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-12-04T21:20:44.848-03:00  INFO 58243 --- [  restartedMain] api.VemMercadoApiApplication             : Started VemMercadoApiApplication in 4.568 seconds (process running for 4.713)
+2025-12-04T21:26:31.997-03:00  INFO 58243 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-04T21:26:31.997-03:00  INFO 58243 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-04T21:26:31.998-03:00  INFO 58243 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+Hibernate: select um1_0.id,um1_0.cpf,um1_0.email,um1_0.nome,um1_0.senha,um1_0.telefone from usuario um1_0 where um1_0.email=?
+Hibernate: select um1_0.id,um1_0.cpf,um1_0.email,um1_0.nome,um1_0.senha,um1_0.telefone from usuario um1_0 where um1_0.cpf=?
+Hibernate: select um1_0.id,um1_0.cpf,um1_0.email,um1_0.nome,um1_0.senha,um1_0.telefone from usuario um1_0 where um1_0.telefone=?
+Hibernate: insert into usuario (cpf,email,nome,senha,telefone) values (?,?,?,?,?)
+2025-12-04T21:26:32.940-03:00  WARN 58243 --- [nio-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot construct instance of `api.model.produto.Categoria`, problem: Categoria inválida: ALIMENTO]
+Hibernate: select pm1_0.id,pm1_0.categoria,pm1_0.descricao,pm1_0.ean,pm1_0.estoque,pm1_0.imagem,pm1_0.nome,pm1_0.sku,pm1_0.valor from produto pm1_0
+Hibernate: select um1_0.id,um1_0.cpf,um1_0.email,um1_0.nome,um1_0.senha,um1_0.telefone from usuario um1_0 where um1_0.cpf=?
+Hibernate: select e1_0.usuario_id,e1_0.id,e1_0.bairro,e1_0.cep,e1_0.cidade,e1_0.estado,e1_0.logradouro,e1_0.numero from endereco e1_0 where e1_0.usuario_id=?
+Hibernate: select um1_0.id,um1_0.cpf,um1_0.email,um1_0.nome,um1_0.senha,um1_0.telefone from usuario um1_0 where um1_0.id=?
+Hibernate: select em1_0.id,em1_0.bairro,em1_0.cep,em1_0.cidade,em1_0.estado,em1_0.logradouro,em1_0.numero,em1_0.usuario_id from endereco em1_0 left join usuario u1_0 on u1_0.id=em1_0.usuario_id where u1_0.id=?
+2025-12-04T21:26:55.102-03:00  WARN 58243 --- [nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [1] in public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> api.controller.EnderecoController.salvarEndereco(java.lang.Long,api.dto.enderecoDTO.EnderecoRequestDTO): [Field error in object 'enderecoRequestDTO' on field 'estado': rejected value [SP]; codes [Size.enderecoRequestDTO.estado,Size.estado,Size.java.lang.String,Size]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [enderecoRequestDTO.estado,estado]; arguments []; default message [estado],40,3]; default message [O estado ter deve ter minimo 3 caracteres]] ]
+Hibernate: select um1_0.id,um1_0.cpf,um1_0.email,um1_0.nome,um1_0.senha,um1_0.telefone from usuario um1_0 where um1_0.id=?
+Hibernate: select em1_0.id,em1_0.bairro,em1_0.cep,em1_0.cidade,em1_0.estado,em1_0.logradouro,em1_0.numero,em1_0.usuario_id from endereco em1_0 left join usuario u1_0 on u1_0.id=em1_0.usuario_id where u1_0.id=?
+Hibernate: select um1_0.id,um1_0.cpf,um1_0.email,um1_0.nome,um1_0.senha,um1_0.telefone from usuario um1_0 where um1_0.id=?
+Hibernate: select em1_0.id,em1_0.bairro,em1_0.cep,em1_0.cidade,em1_0.estado,em1_0.logradouro,em1_0.numero,u1_0.id,u1_0.cpf,u1_0.email,u1_0.nome,u1_0.senha,u1_0.telefone from endereco em1_0 left join usuario u1_0 on u1_0.id=em1_0.usuario_id where em1_0.id=?
+Hibernate: select pm1_0.id,pm1_0.categoria,pm1_0.descricao,pm1_0.ean,pm1_0.estoque,pm1_0.imagem,pm1_0.nome,pm1_0.sku,pm1_0.valor from produto pm1_0 where pm1_0.id=?
+Hibernate: insert into pedido (data_criacao,endereco_id,status_pedido,usuario_id,valor_pedido) values (?,?,?,?,?)
+Hibernate: insert into item_pedido (pedido_id,produto_id,quantidade,valor_item) values (?,?,?,?)
+2025-12-04T21:32:14.948-03:00  INFO 58243 --- [ionShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-04T21:32:14.954-03:00  INFO 58243 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-12-04T21:32:14.958-03:00  INFO 58243 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-04T21:32:14.962-03:00  INFO 58243 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-12-04T21:32:15.775-03:00  INFO 58243 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

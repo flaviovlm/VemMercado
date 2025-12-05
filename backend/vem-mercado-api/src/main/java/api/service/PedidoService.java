@@ -78,15 +78,13 @@ public class PedidoService {
 
     public PedidoResponseDTO salvar(PedidoRequestDTO dto) {
 
-        UsuarioModel usuario = usuarioRepository.findById(dto.getUsuarioId())
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-
         EnderecoModel endereco = enderecoRepository.findById(dto.getEnderecoEntregaId())
                 .orElseThrow(() -> new RuntimeException("Endereço de entrega não encontrado"));
 
-        // ✔ Verifica se o usuário possui pelo menos 1 endereço cadastrado
-        if (usuario.getEndereco() == null || usuario.getEndereco().isEmpty()) {
-            throw new RuntimeException("Você não possui um endereço cadastrado. Cadastre um endereço antes de continuar.");
+        // Usar o usuário dono do endereço como dono do pedido, em vez de confiar no usuarioId vindo do cliente
+        UsuarioModel usuario = endereco.getUsuario();
+        if (usuario == null) {
+            throw new RuntimeException("Endereço não possui usuário associado");
         }
 
         PedidoModel pedido = new PedidoModel();
