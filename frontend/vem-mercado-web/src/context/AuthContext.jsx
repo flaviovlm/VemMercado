@@ -10,13 +10,20 @@ export const AuthProvider = ({ children }) => {
     setUsuario(user);
     sessionStorage.setItem("usuario", JSON.stringify(user));
   };
+
   const logout = () => {
     setUsuario(null);
     sessionStorage.removeItem("usuario");
   };
 
+  // 🔥 ATUALIZAR GLOBALMENTE O USUÁRIO
+  const updateUsuario = (newUser) => {
+    setUsuario(newUser);
+    sessionStorage.setItem("usuario", JSON.stringify(newUser));
+  };
+
   return (
-    <AuthContext.Provider value={{ usuario, login, logout }}>
+    <AuthContext.Provider value={{ usuario, login, logout, updateUsuario }}>
       {children}
     </AuthContext.Provider>
   );
