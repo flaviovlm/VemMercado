@@ -1,16 +1,36 @@
-Trello
-https://trello.com/invite/b/6928d782569d75d06252b2a1/ATTIfb3f48987e64bf7e23389c28404eb25e8B59D464/vemmercado
+# VemMercado – E-commerce desenvolvido com Java Spring, React e Supabase
 
-VemMercado – E-commerce desenvolvido com Java Spring, React e Supabase
+![VemMercado](https://drive.google.com/uc?export=view&id=144fz0fl8G7M3qOnT8mhtclxlgnMVUwC_)
 
-O VemMercado é um e-commerce completo desenvolvido com foco em desempenho, escalabilidade e boas práticas de arquitetura. O projeto integra um ecossistema moderno utilizando Java Spring Boot no back-end, React no front-end e Supabase (PostgreSQL) como banco de dados na nuvem.
+O **VemMercado** é um e-commerce completo desenvolvido com foco em desempenho, escalabilidade e boas práticas de arquitetura. O projeto integra um ecossistema moderno utilizando **Java Spring Boot** no back-end, **React** no front-end e **Supabase (PostgreSQL)** como banco de dados na nuvem.
 
-No back-end, a aplicação foi construída com Spring Boot, seguindo padrões REST, camadas bem definidas (Controller, Service e Repository) e integração com serviços externos. A API gerencia produtos, usuários, pedidos, itens de pedido e autenticação, garantindo segurança, validações robustas e respostas eficientes.
+## 🔧 Back-end (Java Spring Boot)
+A API foi construída seguindo o padrão em camadas (Controller, Service e Repository), oferecendo:
+- Endpoints REST bem estruturados
+- Validações robustas
+- Integração com serviços externos
+- Gerenciamento de produtos, usuários, pedidos e itens de pedido
+- Segurança e performance
 
-No front-end, o sistema utiliza React para criar uma interface moderna, responsiva e intuitiva. A comunicação com a API é feita por meio de chamadas REST, exibindo produtos, detalhes, carrinho e fluxo de checkout. A experiência do usuário foi pensada para ser simples, rápida e fluida.
+## 💻 Front-end (React)
+A interface é moderna, responsiva e interativa, com:
+- Consumo de API REST
+- Listagem e detalhes de produtos
+- Carrinho de compras
+- Fluxo de checkout
+- UI otimizada para experiência rápida e fluida
 
-O banco de dados é mantido em Supabase, utilizando PostgreSQL, com integração direta via Spring Data JPA. O Supabase oferece alta disponibilidade, performance e fácil gerenciamento das tabelas, além de autenticação e permissões bem definidas.
+## 🛢 Banco de Dados (Supabase / PostgreSQL)
+A persistência dos dados é feita no Supabase, com:
+- PostgreSQL gerenciado
+- Alta disponibilidade
+- Integração via Spring Data JPA
+- Regras de acesso e autenticação
 
-O VemMercado demonstra domínio das principais tecnologias do mercado, incluindo Java, Spring Boot, React, APIs REST, PostgreSQL e computação em nuvem, representando um projeto sólido e funcional de e-commerce full-stack.
+## 🚀 Tecnologias Utilizadas
+- Java • Spring Boot • Spring Data JPA  
+- React • Axios  
+- Supabase • PostgreSQL  
+- REST API • Arquitetura em camadas  
 
-https://drive.google.com/file/d/144fz0fl8G7M3qOnT8mhtclxlgnMVUwC_/view?usp=sharing
+O **VemMercado** representa um sistema full-stack completo, com estrutura profissional e tecnologias amplamente utilizadas no mercado.
