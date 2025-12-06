@@ -1,6 +1,6 @@
 # VemMercado – E-commerce desenvolvido com Java Spring, React e Supabase
 
-![VemMercado](https://drive.google.com/uc?export=view&id=144fz0fl8G7M3qOnT8mhtclxlgnMVUwC_)
+![VemMercado](https://drive.google.com/uc?export=view&id=1R4ZxyY5PDtbCoqGoUY6Evv8KiomRiqYL)
 
 O **VemMercado** é um e-commerce completo desenvolvido com foco em desempenho, escalabilidade e boas práticas de arquitetura. O projeto integra um ecossistema moderno utilizando **Java Spring Boot** no back-end, **React** no front-end e **Supabase (PostgreSQL)** como banco de dados na nuvem.
 
