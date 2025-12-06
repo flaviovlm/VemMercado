@@ -1,297 +1,199 @@
-/* ARQUIVO: style.css (Para página Pedidos) */
-/* Importando a fonte Inter */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --apple-green: #34c759;
-  --apple-green-hover: #248a3d;
-  --bg-color: #f5f5f7;
-  --card-bg: #ffffff;
-  --text-primary: #1d1d1f;
-  --text-secondary: #86868b;
-  --divider: #e5e5ea;
-  --input-bg: #f5f5f7;
-  --border-focus: #34c759;
+  --apple-bg: #F5F5F7;
+  --card-bg: #FFFFFF;
+  --text-primary: #1D1D1F;
+  --text-secondary: #86868B;
+  --accent-color: #34c759; /* Verde Vem Mercado */
+  --accent-hover: #248a3d;
+  --border-color: #e5e5ea;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
-/* Container Principal */
+/* === Layout da Página === */
 .pedidos-page {
+  min-height: 100vh;
+  background-color: var(--apple-bg);
+  padding: 60px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 80px 20px 40px;
-  background-color: var(--bg-color);
-  min-height: 100vh;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
+  font-family: 'Inter', sans-serif;
 }
 
-.pedidos-page h2,
-h2 {
-  color: var(--text-primary);
-  margin-bottom: 40px;
+.pedidos-page h2 {
+  font-size: 3rem;
   font-weight: 700;
-  font-size: 2.5rem;
   letter-spacing: -0.02em;
-  text-align: center;
-}
-
-/* Barra de Busca */
-.search-row {
-  display: flex;
-  gap: 12px;
-  width: 100%;
-  max-width: 1000px;
   margin-bottom: 40px;
-}
-
-.search-row input {
-  flex: 1;
-  padding: 16px 18px;
-  background-color: var(--input-bg);
-  border: 2px solid transparent;
-  border-radius: 12px;
-  font-size: 1rem;
   color: var(--text-primary);
-  font-family: 'Inter', sans-serif;
-  outline: none;
-  transition: all 0.2s ease;
 }
 
-.search-row input::placeholder {
-  color: var(--text-secondary);
-  font-weight: 400;
+/* === Barra de Pesquisa (Igual Produtos) === */
+.search-container {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 60px;
 }
 
-.search-row input:focus {
-  background-color: #ffffff;
-  border-color: var(--border-focus);
-  box-shadow: 0 0 0 4px rgba(52, 199, 89, 0.1);
+.search-input-wrapper {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
 }
 
-.search-row input:hover:not(:focus) {
-  border-color: #d2d2d7;
-}
-
-.search-row .btn {
-  background-color: var(--apple-green);
-  color: white;
-  padding: 16px 32px;
-  font-size: 1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  font-family: 'Inter', sans-serif;
-  box-shadow: 0 4px 12px rgba(52, 199, 89, 0.3);
-}
-
-.search-row .btn:hover {
-  background-color: var(--apple-green-hover);
+.search-input-wrapper:focus-within {
+  background-color: #fff;
+  box-shadow: var(--shadow-md);
+  border-color: rgba(52, 199, 89, 0.3);
   transform: scale(1.02);
-  box-shadow: 0 6px 15px rgba(52, 199, 89, 0.4);
 }
 
-.search-row .btn:active {
-  transform: scale(0.98);
-}
+.search-icon { color: var(--text-secondary); margin-right: 12px; }
 
-/* Grid de Cards */
+.search-input-wrapper input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1.1rem;
+  background: transparent;
+  color: var(--text-primary);
+}
+.search-input-wrapper input::placeholder { color: #A1A1A6; }
+
+
+/* === Grid === */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 24px;
   width: 100%;
   max-width: 1200px;
-  margin-top: 20px;
 }
 
-/* Card de Pedido */
+/* === Card de Pedido === */
 .card {
   background-color: var(--card-bg);
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid transparent;
   transition: all 0.3s ease;
   overflow: hidden;
-  border: 1px solid transparent;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-  border-color: var(--divider);
+  box-shadow: var(--shadow-md);
 }
 
-.card-body {
-  padding: 28px;
-}
-
-.card-body p {
-  margin: 0 0 14px 0;
-  color: var(--text-primary);
-  font-size: 1rem;
-  line-height: 1.6;
+/* Linha do Topo (ID e Status) */
+.card-header-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.card-body p:last-of-type {
-  margin-bottom: 0;
-}
-
-.card-body p strong {
-  font-weight: 600;
+.order-id {
+  font-size: 1.2rem;
+  font-weight: 700;
   color: var(--text-primary);
 }
 
-/* Footer do Card */
-.card-footer {
-  margin-top: 24px;
-  padding-top: 20px;
-  border-top: 1px solid var(--divider);
+/* Badge de Status (Pílula Colorida) */
+.status-badge {
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  background-color: #f0f0f0;
+  color: var(--text-secondary);
 }
 
-/* Details (Itens do Pedido) */
-details {
-  cursor: pointer;
+/* Cores Automáticas baseadas no texto do status */
+.status-badge.entregue { background-color: rgba(52, 199, 89, 0.15); color: #248a3d; }
+.status-badge.cancelado { background-color: rgba(255, 59, 48, 0.1); color: #FF3B30; }
+.status-badge.pendente { background-color: rgba(255, 149, 0, 0.1); color: #FF9500; }
+
+/* Corpo do Card */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 1rem;
+}
+
+.label { color: var(--text-secondary); }
+.value { color: var(--text-primary); font-weight: 500; }
+.value.price { font-weight: 700; color: var(--text-primary); }
+
+/* === Detalhes / Itens === */
+.card-footer {
+  margin-top: 20px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 16px;
 }
 
 details summary {
-  padding: 14px 18px;
-  background-color: var(--input-bg);
-  border-radius: 12px;
+  cursor: pointer;
+  color: var(--accent-color);
   font-weight: 600;
   font-size: 0.95rem;
-  color: var(--text-primary);
   list-style: none;
-  transition: all 0.2s ease;
-  user-select: none;
-  font-family: 'Inter', sans-serif;
+  transition: color 0.2s;
+  outline: none;
 }
-
-details summary::-webkit-details-marker {
-  display: none;
-}
-
-details summary::after {
-  content: "▼";
-  float: right;
-  font-size: 0.85rem;
-  transition: transform 0.2s ease;
-  color: var(--text-secondary);
-}
-
-details[open] summary::after {
-  transform: rotate(180deg);
-}
-
-details summary:hover {
-  background-color: #ededef;
-}
-
-details[open] summary {
-  background-color: var(--apple-green);
-  color: white;
-  margin-bottom: 16px;
-}
-
-details[open] summary::after {
-  color: white;
-}
+details summary:hover { color: var(--accent-hover); }
+details summary::-webkit-details-marker { display: none; }
 
 /* Lista de Itens */
-details ul {
+.itens-lista {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin-top: 12px;
+  background-color: #F9F9F9;
+  border-radius: 12px;
+  padding: 16px;
 }
 
-details ul li {
-  padding: 12px 18px;
-  background-color: var(--input-bg);
-  border-radius: 10px;
-  margin-bottom: 8px;
-  font-size: 0.95rem;
-  color: var(--text-primary);
-  transition: background-color 0.2s ease;
+.itens-lista li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
 }
+.itens-lista li:last-child { border-bottom: none; }
 
-details ul li:last-child {
-  margin-bottom: 0;
-}
+.item-nome { font-weight: 500; color: var(--text-primary); }
 
-details ul li:hover {
-  background-color: #ededef;
-}
-
-/* Mensagem sem dados */
+/* Mensagem Vazia */
 .no-data {
+  grid-column: 1 / -1;
   text-align: center;
   color: var(--text-secondary);
   font-size: 1.1rem;
-  font-weight: 500;
-  margin-top: 60px;
+  margin-top: 40px;
+  background: white;
   padding: 40px;
-  background-color: var(--card-bg);
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  grid-column: 1 / -1;
+  border-radius: 20px;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .pedidos-page {
-    padding: 60px 16px 40px;
-  }
-
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 30px;
-  }
-
-  .search-row {
-    flex-direction: column;
-    max-width: 100%;
-  }
-
-  .search-row .btn {
-    width: 100%;
-    padding: 14px;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .card-body {
-    padding: 24px;
-  }
-
-  .card-body p {
-    font-size: 0.95rem;
-  }
-}
-
-@media (max-width: 480px) {
-  h2 {
-    font-size: 1.75rem;
-  }
-
-  .search-row input {
-    padding: 14px 16px;
-    font-size: 0.95rem;
-  }
-
-  details summary {
-    padding: 12px 16px;
-    font-size: 0.9rem;
-  }
-
-  details ul li {
-    padding: 10px 16px;
-    font-size: 0.9rem;
-  }
+  .pedidos-page h2 { font-size: 2.2rem; }
+  .grid { grid-template-columns: 1fr; }
 }

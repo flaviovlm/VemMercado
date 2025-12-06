@@ -1,15 +1,26 @@
 import React from "react";
 
-export default function ProductCard({ produto, onAdd }){
+export default function ProductCard({ produto, onAdd }) {
+  const imageSrc = produto.imagem && produto.imagem.length > 10 
+    ? produto.imagem 
+    : "https://placehold.co/200x200?text=Sem+Imagem";
+
   return (
-    <div className="card">
-      {produto.imagem && <img src={produto.imagem} alt={produto.nome} className="card-img" />}
-      <div className="card-body">
+    <div className="product-card">
+      <div className="card-image-wrapper">
+        <img src={imageSrc} alt={produto.nome} />
+      </div>
+
+      <div className="card-info">
         <h3>{produto.nome}</h3>
-        <p className="muted">{produto.descricao}</p>
-        <div className="card-footer">
-          <strong>R$ {produto.valor?.toFixed ? produto.valor.toFixed(2) : produto.valor}</strong>
-          <button className="btn" onClick={() => onAdd(produto)}>Adicionar ao Carrinho</button>
+        
+        <div className="card-bottom">
+          <span className="price">
+            {parseFloat(produto.valor).toFixed(2).replace('.', ',')}
+          </span>
+          <button onClick={() => onAdd(produto)}>
+            Comprar
+          </button>
         </div>
       </div>
     </div>
