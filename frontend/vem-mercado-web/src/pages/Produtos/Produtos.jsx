@@ -4,6 +4,7 @@ import ProductCard from "../../components/ProductCard";
 import Loading from "../../components/Loading";
 import { useCart } from "../../context/CartContext";
 import Toast from "../../components/Toast";
+import "./style.css";
 
 export default function Produtos(){
   const [produtos, setProdutos] = useState([]);

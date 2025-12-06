@@ -9,7 +9,7 @@ export default function ProductCard({ produto, onAdd }){
         <p className="muted">{produto.descricao}</p>
         <div className="card-footer">
           <strong>R$ {produto.valor?.toFixed ? produto.valor.toFixed(2) : produto.valor}</strong>
-          <button className="btn" onClick={() => onAdd(produto)}>Adicionar</button>
+          <button className="btn" onClick={() => onAdd(produto)}>Adicionar ao Carrinho</button>
         </div>
       </div>
     </div>
