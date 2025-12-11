@@ -19,13 +19,14 @@ public class PedidoResponseDTO {
     private BigDecimal valorTotal;
     private LocalDateTime dataCriacao;
 
-    public PedidoResponseDTO(Long idPedido, Long usuarioId, List<ItemPedidoResponseDTO> itens, Long enderecoEntregaId, Status status, BigDecimal valorTotal) {
+    public PedidoResponseDTO(Long idPedido, Long usuarioId, List<ItemPedidoResponseDTO> itens, Long enderecoEntregaId, Status status, BigDecimal valorTotal, LocalDateTime dataCriacao) {
         this.idPedido = idPedido;
         this.usuarioId = usuarioId;
         this.itens = itens;
         this.enderecoEntregaId = enderecoEntregaId;
         this.status = status;
         this.valorTotal = valorTotal;
+        this.dataCriacao = dataCriacao;
     }
 
     public PedidoResponseDTO(PedidoModel pedido) {
@@ -34,6 +35,7 @@ public class PedidoResponseDTO {
         this.enderecoEntregaId = pedido.getEndereco().getId();
         this.status = pedido.getStatusPedido();
         this.valorTotal = pedido.getValorPedido();
+        this.dataCriacao = pedido.getDataCriacao();
         this.itens = pedido
                 .getItemPedido()
                 .stream()

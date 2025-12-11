@@ -9,36 +9,33 @@ export default function Pedidos() {
   const [pedidos, setPedidos] = useState([]);
   const [toast, setToast] = useState(null);
   
-  // Estado para a barra de pesquisa
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     if (!usuario) return;
     
-    // Carrega TODOS os pedidos de uma vez
     listarPedidosDoUsuario(usuario.id)
-      .then((res) => setPedidos(res))
+      .then((res) => {
+        console.log("RESPOSTA DA API:", res); // <--- COLOQUE AQUI
+        setPedidos(res);
+      })
       .catch((err) =>
         setToast(err.response?.data?.mensagem || "Erro ao carregar pedidos")
       );
   }, [usuario]);
 
-  // Lógica de Filtro em Tempo Real (ID ou Status)
   const pedidosFiltrados = pedidos.filter((p) => {
     const termo = searchTerm.toLowerCase();
     const id = p.idPedido ? String(p.idPedido) : "";
     const status = p.status ? p.status.toLowerCase() : "";
     
-    // Retorna se o ID ou o Status contém o que foi digitado
     return id.includes(termo) || status.includes(termo);
   });
 
-  // Função auxiliar para formatar preço
   const formatMoney = (val) => {
     return parseFloat(val || 0).toFixed(2).replace('.', ',');
   };
 
-  // Função auxiliar para formatar data
   const formatData = (dataIso) => {
     if (!dataIso) return "—";
     return new Date(dataIso).toLocaleDateString('pt-BR');
@@ -48,7 +45,6 @@ export default function Pedidos() {
     <div className="pedidos-page">
       <h2>Meus Pedidos</h2>
 
-      {/* === BARRA DE PESQUISA (Estilo Apple) === */}
       <div className="search-container">
         <div className="search-input-wrapper">
           <svg 
@@ -96,7 +92,7 @@ export default function Pedidos() {
                   <span className="value price">R$ {formatMoney(p.valorTotal)}</span>
                 </div>
 
-                {/* Detalhes / Accordion */}
+                {/* Detalhes */}
                 <div className="card-footer">
                   <details>
                     <summary>Ver Itens do Pedido</summary>

@@ -32,12 +32,10 @@ export default function Produtos() {
     setTimeout(() => setToast(null), 2000);
   };
 
-  // === 1. LÓGICA DE FILTRO (BUSCA) ===
   const produtosFiltrados = produtos.filter((produto) =>
     produto.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // === 2. LÓGICA DE CATEGORIAS (Usa os filtrados) ===
   const produtosPorCategoria = produtosFiltrados.reduce((acc, produto) => {
     const categoria = produto.categoria || "Outros";
     if (!acc[categoria]) acc[categoria] = [];
@@ -51,10 +49,8 @@ export default function Produtos() {
     <div className="produtos-page">
       <h2>Nossos Produtos</h2>
 
-      {/* === BARRA DE PESQUISA === */}
       <div className="search-container">
         <div className="search-input-wrapper">
-          {/* Ícone de Lupa SVG */}
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             width="20" height="20" viewBox="0 0 24 24" 
@@ -79,7 +75,6 @@ export default function Produtos() {
         <Loading />
       ) : (
         <div className="catalogo-container">
-          {/* Se não achar nada, avisa o usuário */}
           {!loading && categorias.length === 0 && (
             <div className="no-results">
               <p>Nenhum produto encontrado para "{searchTerm}"</p>

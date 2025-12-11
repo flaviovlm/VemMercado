@@ -41,17 +41,15 @@
   color: var(--text-secondary);
 }
 
-/* === LAYOUT GRID (Esquerda / Direita) === */
 .cart-grid {
   display: grid;
-  grid-template-columns: 1fr 380px; /* Esquerda flexível, Direita fixa */
+  grid-template-columns: 1fr 380px; 
   gap: 32px;
   max-width: 1100px;
   margin: 0 auto;
-  align-items: start; /* Alinha no topo */
+  align-items: start; 
 }
 
-/* === LISTA DE ITENS (Esquerda) === */
 .cart-items-container {
   display: flex;
   flex-direction: column;
@@ -110,14 +108,12 @@
   color: var(--text-secondary);
 }
 
-/* Ações (Stepper e Remover) */
 .item-actions {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-/* O Stepper (Cápsula) */
 .quantity-control {
   display: flex;
   align-items: center;
@@ -163,10 +159,9 @@
 }
 .remove-btn:hover { opacity: 1; }
 
-/* === RESUMO (Direita) === */
 .cart-summary-wrapper {
-  position: sticky; /* Faz o resumo acompanhar a rolagem! */
-  top: 40px; /* Distância do topo */
+  position: sticky;
+  top: 40px; 
 }
 
 .cart-summary-card {
@@ -201,7 +196,6 @@
   margin: 20px 0;
 }
 
-/* Select de Endereço Customizado */
 .address-section {
   margin-bottom: 24px;
 }
@@ -248,7 +242,6 @@
   pointer-events: none;
 }
 
-/* Alerta sem endereço */
 .no-address-alert p {
   color: #FF3B30;
   font-size: 0.9rem;
@@ -261,7 +254,6 @@
   font-size: 0.9rem;
 }
 
-/* Total e Botão */
 .summary-total {
   display: flex;
   justify-content: space-between;
@@ -297,7 +289,6 @@
   cursor: not-allowed;
 }
 
-/* === EMPTY STATE === */
 .empty-cart {
   text-align: center;
   padding: 60px 20px;

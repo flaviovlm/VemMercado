@@ -1,29 +1,23 @@
-/* Fonte Premium */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  /* === CORES (Agora Verdes) === */
   --apple-bg: #F5F5F7;          
   --card-bg: #FFFFFF;
   --text-primary: #1D1D1F;      
   --text-secondary: #86868B;    
   
-  /* Verde da sua Marca */
   --accent-color: #34c759;      
   --accent-hover: #248a3d;      
   
-  /* Sombras Suaves */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
   --shadow-hover: 0 14px 40px rgba(0, 0, 0, 0.12); /* Sombra um pouco maior no hover */
 }
 
-/* === Reset Básico === */
 * { box-sizing: border-box; }
 
 body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
 
-/* === Layout da Página === */
 .produtos-page {
   min-height: 100vh;
   background-color: var(--apple-bg);
@@ -34,7 +28,6 @@ body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-
   color: var(--text-primary);
 }
 
-/* Título Principal */
 .produtos-page h2 {
   font-size: 3rem; 
   font-weight: 700;
@@ -43,10 +36,9 @@ body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-
   color: var(--text-primary);
 }
 
-/* === Barra de Pesquisa === */
 .search-container {
   width: 100%;
-  max-width: 600px; /* Um pouco mais larga para acompanhar os cards maiores */
+  max-width: 600px;
   margin-bottom: 60px;
 }
 
@@ -65,7 +57,7 @@ body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-
 .search-input-wrapper:focus-within {
   box-shadow: var(--shadow-md);
   background-color: #fff;
-  border-color: rgba(52, 199, 89, 0.3); /* Borda verde bem suave ao focar */
+  border-color: rgba(52, 199, 89, 0.3); 
   transform: scale(1.02); 
 }
 
@@ -81,13 +73,11 @@ body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-
 }
 .search-input-wrapper input::placeholder { color: #A1A1A6; }
 
-/* === Container Geral === */
 .catalogo-container {
   width: 100%;
-  max-width: 1300px; /* Aumentei a largura máxima da tela */
+  max-width: 1300px; 
 }
 
-/* === Seções de Categoria === */
 .categoria-section {
   margin-bottom: 80px; 
 }
@@ -100,21 +90,18 @@ body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-
   letter-spacing: -0.01em;
 }
 
-/* === Grid (Aumentado) === */
 .produtos-grid {
   display: grid;
-  /* Mudei de 260px para 300px. Cards ficarão mais largos */
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
   gap: 32px; 
 }
 
-/* === O CARD APPLE === */
 .product-card {
   background-color: var(--card-bg);
-  border-radius: 24px; /* Mais arredondado ainda */
+  border-radius: 24px; 
   border: none; 
   box-shadow: var(--shadow-sm);
-  padding: 28px; /* Mais espaçamento interno */
+  padding: 28px; 
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -129,10 +116,9 @@ body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-
   box-shadow: var(--shadow-hover);
 }
 
-/* Wrapper da Imagem (Aumentado) */
 .card-image-wrapper {
   width: 100%;
-  height: 250px; /* Aumentei a altura da área da imagem */
+  height: 250px; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -150,7 +136,6 @@ body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-
   transform: scale(1.08);
 }
 
-/* Informações */
 .card-info {
   display: flex;
   flex-direction: column;
@@ -159,7 +144,7 @@ body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-
 }
 
 .card-info h3 {
-  font-size: 1.2rem; /* Fonte do título um pouco maior */
+  font-size: 1.2rem;
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 10px;
@@ -171,7 +156,6 @@ body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-
   height: 2.8em;
 }
 
-/* Rodapé do Card */
 .card-bottom {
   margin-top: auto;
   width: 100%;
@@ -182,26 +166,25 @@ body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-
 }
 
 .price {
-  font-size: 1.4rem; /* Preço maior */
-  font-weight: 600; /* Preço mais negrito */
+  font-size: 1.4rem; 
+  font-weight: 600; 
   color: var(--text-primary);
 }
 .price::before { content: "R$ "; font-size: 1rem; color: var(--text-secondary); font-weight: 400; }
 
-/* Botão "Comprar" (Verde) */
 .product-card button {
-  background-color: var(--accent-color); /* Usa o VERDE agora */
+  background-color: var(--accent-color);
   color: white;
   border: none;
   border-radius: 999px; 
-  padding: 12px 32px; /* Botão um pouco maior */
+  padding: 12px 32px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
   width: auto; 
   min-width: 140px;
-  box-shadow: 0 4px 12px rgba(52, 199, 89, 0.3); /* Sombra verde suave no botão */
+  box-shadow: 0 4px 12px rgba(52, 199, 89, 0.3);
 }
 
 .product-card button:hover {

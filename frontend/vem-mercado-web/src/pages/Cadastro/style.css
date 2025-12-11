@@ -1,5 +1,3 @@
-/* ARQUIVO: style.css (Para páginas de Cadastro e Login) */
-/* Importando a fonte Inter */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
@@ -14,14 +12,12 @@
   --border-focus: #34c759;
 }
 
-/* Container Principal */
 body {
   background-color: var(--bg-color);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Card Form Container */
 .card-form {
   display: flex;
   flex-direction: column;
@@ -41,7 +37,6 @@ body {
   text-align: center;
 }
 
-/* Formulário */
 .card-form form {
   background-color: var(--card-bg);
   padding: 40px;
@@ -54,7 +49,6 @@ body {
   gap: 8px;
 }
 
-/* Inputs */
 .card-form input {
   width: 100%;
   padding: 16px 18px;
@@ -89,7 +83,6 @@ body {
   cursor: not-allowed;
 }
 
-/* Mensagens de Erro */
 .error {
   color: var(--error-color);
   font-size: 0.85rem;
@@ -99,7 +92,6 @@ body {
   display: block;
 }
 
-/* Botão Principal */
 .card-form .btn {
   width: 100%;
   background-color: var(--apple-green);
@@ -132,7 +124,6 @@ body {
   transform: none;
 }
 
-/* Link adicional (ex: "Já tem conta? Faça login") */
 .card-form .link-text {
   margin-top: 24px;
   text-align: center;
@@ -152,7 +143,6 @@ body {
   text-decoration: underline;
 }
 
-/* Divisor (opcional) */
 .card-form .divider {
   width: 100%;
   height: 1px;
@@ -160,7 +150,6 @@ body {
   margin: 24px 0;
 }
 
-/* Animação de entrada */
 @keyframes fadeInUp {
   from {
     opacity: 0;

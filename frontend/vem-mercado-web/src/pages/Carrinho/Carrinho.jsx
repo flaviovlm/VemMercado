@@ -3,7 +3,7 @@ import { useCart } from "../../context/CartContext";
 import { criarPedido } from "../../api/pedidoApi";
 import { useAuth } from "../../context/AuthContext";
 import Toast from "../../components/Toast";
-import { Link } from "react-router-dom"; // Assumindo que usa react-router
+import { Link } from "react-router-dom"; 
 import "./style.css";
 
 export default function Carrinho() {
@@ -48,7 +48,7 @@ export default function Carrinho() {
     }
   };
 
-  // Helper para imagem
+
   const getImage = (img) => {
     return img && img.length > 10 ? img : "https://placehold.co/100x100?text=Sem+Foto";
   };
@@ -74,16 +74,13 @@ export default function Carrinho() {
       ) : (
         <div className="cart-grid">
           
-          {/* === LADO ESQUERDO: LISTA DE ITENS === */}
           <div className="cart-items-container">
             {items.map((it) => (
               <div key={it.id} className="cart-item">
-                {/* Imagem do Produto */}
                 <div className="item-image">
                   <img src={getImage(it.imagem)} alt={it.nome} />
                 </div>
 
-                {/* Detalhes */}
                 <div className="item-details">
                   <div className="item-info">
                     <h3>{it.nome}</h3>
@@ -93,7 +90,6 @@ export default function Carrinho() {
                   </div>
 
                   <div className="item-actions">
-                    {/* Controlador de Quantidade (Stepper) */}
                     <div className="quantity-control">
                       <button 
                         onClick={() => updateQuantity(it.id, Math.max(1, it.quantity - 1))}
@@ -119,7 +115,6 @@ export default function Carrinho() {
             ))}
           </div>
 
-          {/* === LADO DIREITO: RESUMO/CHECKOUT === */}
           <div className="cart-summary-wrapper">
             <div className="cart-summary-card">
               <h3>Resumo do Pedido</h3>
@@ -135,7 +130,6 @@ export default function Carrinho() {
 
               <div className="divider"></div>
 
-              {/* Seletor de Endereço Estilizado */}
               <div className="address-section">
                 <label>Entregar em:</label>
                 {usuario?.enderecos?.length > 0 ? (

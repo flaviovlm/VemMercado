@@ -49,7 +49,8 @@ public class PedidoService {
                                 .toList(),
                         pedidoModel.getEndereco().getId(),
                         pedidoModel.getStatusPedido(),
-                        pedidoModel.getValorPedido()
+                        pedidoModel.getValorPedido(),
+                        pedidoModel.getDataCriacao()
                 ))
                 .toList();
     }
@@ -71,7 +72,8 @@ public class PedidoService {
                                 .toList(),
                         pedido.getEndereco().getId(),
                         pedido.getStatusPedido(),
-                        pedido.getValorPedido()
+                        pedido.getValorPedido(),
+                        pedido.getDataCriacao()
                 ))
                 .toList();
     }

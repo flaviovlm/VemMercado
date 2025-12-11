@@ -8,7 +8,7 @@ import Toast from "../../components/Toast";
 import "./style.css";
 
 const schema = yup.object({
-  // Validações mais expressivas para mensagens de erro claras
+
   nome: yup
     .string()
     .min(3, "O nome deve ter no mínimo 3 caracteres")
@@ -18,18 +18,18 @@ const schema = yup.object({
     .string()
     .email("Formato de e-mail inválido")
     .required("Email é obrigatório"),
-  // Aumentado o mínimo da senha para 6
+
   senha: yup
     .string()
     .min(6, "A senha deve ter no mínimo 6 caracteres")
     .max(10, "A senha deve ter no máximo 20 caracteres")
     .required("Senha é obrigatória"),
-  // Validação focada em 11 dígitos para CPF (apenas números)
+  
   cpf: yup
     .string()
     .matches(/^\d{11}$/, "CPF inválido. Use 11 dígitos.")
     .required("CPF é obrigatório"),
-  // Validação focada em 10 ou 11 dígitos para Telefone (apenas números)
+
   telefone: yup
     .string()
     .matches(/^\d{10,11}$/, "Telefone inválido. Use 10 ou 11 dígitos.")

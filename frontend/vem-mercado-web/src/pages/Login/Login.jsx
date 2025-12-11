@@ -43,12 +43,10 @@ export default function Login() {
         login(res);
         navigate("/produtos");
       }
-      // Se o backend retorna { message, success, usuario } (segunda solução)
       else if (res && res.usuario && res.usuario.id) {
         login(res.usuario);
         navigate("/produtos");
       }
-      // Se o backend ainda está retornando só a mensagem (não corrigido)
       else if (res && res.message) {
         setToast(
           "Login realizado, mas dados do usuário não foram recebidos. Verifique o backend.",

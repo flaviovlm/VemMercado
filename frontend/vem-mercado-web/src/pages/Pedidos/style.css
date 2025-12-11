@@ -12,7 +12,6 @@
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
-/* === Layout da Página === */
 .pedidos-page {
   min-height: 100vh;
   background-color: var(--apple-bg);
@@ -31,7 +30,6 @@
   color: var(--text-primary);
 }
 
-/* === Barra de Pesquisa (Igual Produtos) === */
 .search-container {
   width: 100%;
   max-width: 600px;
@@ -70,7 +68,6 @@
 .search-input-wrapper input::placeholder { color: #A1A1A6; }
 
 
-/* === Grid === */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -79,7 +76,6 @@
   max-width: 1200px;
 }
 
-/* === Card de Pedido === */
 .card {
   background-color: var(--card-bg);
   border-radius: 24px;
@@ -95,7 +91,6 @@
   box-shadow: var(--shadow-md);
 }
 
-/* Linha do Topo (ID e Status) */
 .card-header-row {
   display: flex;
   justify-content: space-between;
@@ -111,7 +106,6 @@
   color: var(--text-primary);
 }
 
-/* Badge de Status (Pílula Colorida) */
 .status-badge {
   padding: 6px 14px;
   border-radius: 99px;
@@ -122,12 +116,10 @@
   color: var(--text-secondary);
 }
 
-/* Cores Automáticas baseadas no texto do status */
 .status-badge.entregue { background-color: rgba(52, 199, 89, 0.15); color: #248a3d; }
 .status-badge.cancelado { background-color: rgba(255, 59, 48, 0.1); color: #FF3B30; }
 .status-badge.pendente { background-color: rgba(255, 149, 0, 0.1); color: #FF9500; }
 
-/* Corpo do Card */
 .info-row {
   display: flex;
   justify-content: space-between;
@@ -139,7 +131,6 @@
 .value { color: var(--text-primary); font-weight: 500; }
 .value.price { font-weight: 700; color: var(--text-primary); }
 
-/* === Detalhes / Itens === */
 .card-footer {
   margin-top: 20px;
   border-top: 1px solid var(--border-color);
@@ -158,7 +149,6 @@ details summary {
 details summary:hover { color: var(--accent-hover); }
 details summary::-webkit-details-marker { display: none; }
 
-/* Lista de Itens */
 .itens-lista {
   list-style: none;
   padding: 0;
@@ -180,7 +170,6 @@ details summary::-webkit-details-marker { display: none; }
 
 .item-nome { font-weight: 500; color: var(--text-primary); }
 
-/* Mensagem Vazia */
 .no-data {
   grid-column: 1 / -1;
   text-align: center;
