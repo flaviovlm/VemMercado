@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --apple-bg: #F5F5F7;
+  --card-bg: #FFFFFF;
+  --text-primary: #1D1D1F;
+  --text-secondary: #86868B;
+  --accent-color: #34c759; /* Verde Vem Mercado */
+  --accent-hover: #248a3d;
+  --border-color: #e5e5ea;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.pedidos-page {
+  min-height: 100vh;
+  background-color: var(--apple-bg);
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.pedidos-page h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 40px;
+  color: var(--text-primary);
+}
+
+.search-container {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 60px;
+}
+
+.search-input-wrapper {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.search-input-wrapper:focus-within {
+  background-color: #fff;
+  box-shadow: var(--shadow-md);
+  border-color: rgba(52, 199, 89, 0.3);
+  transform: scale(1.02);
+}
+
+.search-icon { color: var(--text-secondary); margin-right: 12px; }
+
+.search-input-wrapper input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1.1rem;
+  background: transparent;
+  color: var(--text-primary);
+}
+.search-input-wrapper input::placeholder { color: #A1A1A6; }
+
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.order-id {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.status-badge {
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  background-color: #f0f0f0;
+  color: var(--text-secondary);
+}
+
+.status-badge.entregue { background-color: rgba(52, 199, 89, 0.15); color: #248a3d; }
+.status-badge.cancelado { background-color: rgba(255, 59, 48, 0.1); color: #FF3B30; }
+.status-badge.pendente { background-color: rgba(255, 149, 0, 0.1); color: #FF9500; }
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 1rem;
+}
+
+.label { color: var(--text-secondary); }
+.value { color: var(--text-primary); font-weight: 500; }
+.value.price { font-weight: 700; color: var(--text-primary); }
+
+.card-footer {
+  margin-top: 20px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 16px;
+}
+
+details summary {
+  cursor: pointer;
+  color: var(--accent-color);
+  font-weight: 600;
+  font-size: 0.95rem;
+  list-style: none;
+  transition: color 0.2s;
+  outline: none;
+}
+details summary:hover { color: var(--accent-hover); }
+details summary::-webkit-details-marker { display: none; }
+
+.itens-lista {
+  list-style: none;
+  padding: 0;
+  margin-top: 12px;
+  background-color: #F9F9F9;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.itens-lista li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+.itens-lista li:last-child { border-bottom: none; }
+
+.item-nome { font-weight: 500; color: var(--text-primary); }
+
+.no-data {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-top: 40px;
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .pedidos-page h2 { font-size: 2.2rem; }
+  .grid { grid-template-columns: 1fr; }
+}

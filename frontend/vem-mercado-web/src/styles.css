@@ -1,0 +1,18 @@
+
+:root {
+  --accent: #2563eb;
+  --muted: #666;
+  --bg: #f5f5f7;  
+  --card: #fff;
+  --danger: #e11d48;
+  
+  
+  --apple-green: #34c759;
+  --apple-green-hover: #248a3d;
+  --text-primary: #1d1d1f;
+  --text-secondary: #86868b;
+  --divider: #e5e5ea;
+  --input-bg: #f5f5f7;
+  --border-focus: #34c759;
+}
+
