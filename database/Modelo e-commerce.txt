@@ -1,0 +1,64 @@
+CREATE TABLE usuario (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    cpf VARCHAR(14) NOT NULL UNIQUE,
+    telefone VARCHAR(20) NOT NULL UNIQUE
+);
+
+-- Tabela: Endereco (Depende de Usuario)
+CREATE TABLE endereco (
+    id SERIAL PRIMARY KEY,
+    logradouro VARCHAR(255) NOT NULL,
+    numero VARCHAR(20) NOT NULL,
+    cep VARCHAR(20) NOT NULL,
+    bairro VARCHAR(100) NOT NULL,
+    cidade VARCHAR(100) NOT NULL,
+    estado VARCHAR(50) NOT NULL,
+    usuario_id INTEGER NOT NULL,
+    CONSTRAINT fk_endereco_usuario FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+);
+
+-- Tabela: Produto (COM VALIDAÇÃO DE CATEGORIA)
+CREATE TABLE produto (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    descricao TEXT,
+    ean VARCHAR(255) NOT NULL UNIQUE,
+    sku VARCHAR(255) NOT NULL UNIQUE,
+    valor NUMERIC(10, 2) NOT NULL,
+    estoque INTEGER NOT NULL,
+    imagem TEXT NOT NULL,
+    categoria VARCHAR(50) NOT NULL,
+    
+    -- Validação Estrita de Categoria (Igual ao Enum do Java)
+    CONSTRAINT check_categoria CHECK (categoria IN ('UTILIDADES', 'LIMPEZA', 'HORTOLICAS', 'DERMOCOSMETICOS', 'ELETRONICOS'))
+);
+
+-- Tabela: Pedido (COM VALIDAÇÃO DE STATUS)
+CREATE TABLE pedido (
+    id SERIAL PRIMARY KEY,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    valor_pedido NUMERIC(10, 2) NOT NULL,
+    status_pedido VARCHAR(50) NOT NULL,
+    usuario_id INTEGER NOT NULL,
+    endereco_id INTEGER NOT NULL,
+    
+    CONSTRAINT fk_pedido_usuario FOREIGN KEY (usuario_id) REFERENCES usuario(id),
+    CONSTRAINT fk_pedido_endereco FOREIGN KEY (endereco_id) REFERENCES endereco(id),
+    
+    -- Validação Estrita de Status
+    CONSTRAINT check_status CHECK (status_pedido IN ('AGUARDANDO_PAGAMENTO', 'PAGO', 'SEPARACAO', 'ENVIADO', 'ENTREGUE', 'CANCELADO'))
+);
+
+-- Tabela: Item do Pedido
+CREATE TABLE item_pedido (
+    id SERIAL PRIMARY KEY,
+    quantidade INTEGER NOT NULL,
+    valor_item NUMERIC(10, 2) NOT NULL,
+    pedido_id INTEGER NOT NULL,
+    produto_id INTEGER NOT NULL,
+    CONSTRAINT fk_item_pedido FOREIGN KEY (pedido_id) REFERENCES pedido(id),
+    CONSTRAINT fk_item_produto FOREIGN KEY (produto_id) REFERENCES produto(id)
+);
